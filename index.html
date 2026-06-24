@@ -29,7 +29,6 @@
     background: var(--green);
     color: #fff;
     padding: 18px 32px;
-    border-bottom: 4px solid var(--gold);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,6 +71,40 @@
     font-weight: bold;
     display: block;
   }
+
+  /* PROGRESS BAR (scrubber) */
+  .progress-track {
+    position: relative;
+    height: 22px;
+    background: #0d3d22;
+    border-bottom: 4px solid var(--gold);
+    cursor: pointer;
+    direction: ltr;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+  }
+  .progress-fill {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 0%;
+    background: linear-gradient(90deg, #b8973f, var(--gold) 60%, #ecd680);
+    transition: width 0.12s ease;
+  }
+  .progress-knob {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 16px;
+    height: 34px;
+    transform: translate(-50%, -50%);
+    background: #fff7e2;
+    border: 2px solid #8a6d1f;
+    border-radius: 5px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.45);
+    transition: left 0.12s ease;
+  }
+  .progress-track:hover .progress-knob { background: #fff; }
 
   /* MAIN */
   main {
@@ -321,6 +354,11 @@
     <div class="subtitle">Mishkat 2 — Study Notes</div>
   </div>
 </header>
+
+<div class="progress-track" id="progress-track" title="Drag to jump between hadiths">
+  <div class="progress-fill" id="progress-fill"></div>
+  <div class="progress-knob" id="progress-knob"></div>
+</div>
 
 <div class="nav-bar">
   <button id="btn-next" onclick="navigate(1)" style="direction:ltr">التالي &#8594;</button>
@@ -4453,26 +4491,6 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   </div>
   <!-- ==================== END 5737 ==================== -->
 
-  <!-- ==================== TEST ==================== -->
-  <div class="hadith-entry" data-num="AHMEDS TEST">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Test</span>
-      <span class="kitab-text">AHMEDS TEST</span>
-      <span class="bab-text">صفحة ٨٥ — Page 85</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">AHMEDS TEST</div>
-      <div class="matn-text">
-        This is a test page. If you can see this, the live site is working. ✅
-      </div>
-      <div class="takhrij">Test entry · Page 85</div>
-    </div>
-
-  </div>
-  <!-- ==================== END TEST ==================== -->
-
 </main>
 
 <footer>مشكاة المصابيح — Study Notes &nbsp;|&nbsp; For personal academic use</footer>
@@ -4481,6 +4499,10 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const entries = Array.from(document.querySelectorAll('.hadith-entry'));
   let current = 0;
 
+  const track = document.getElementById('progress-track');
+  const fill = document.getElementById('progress-fill');
+  const knob = document.getElementById('progress-knob');
+
   function render() {
     entries.forEach((e, i) => e.classList.toggle('active', i === current));
     document.getElementById('btn-prev').disabled = current === 0;
@@ -4488,6 +4510,9 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     const num = entries[current] ? entries[current].dataset.num : '';
     document.getElementById('nav-hadith-num').textContent = num ? 'حديث ' + num : '';
     document.getElementById('nav-counter-text').textContent = entries.length ? (current + 1) + ' / ' + entries.length : '';
+    const pct = entries.length > 1 ? (current / (entries.length - 1)) * 100 : 0;
+    fill.style.width = pct + '%';
+    knob.style.left = pct + '%';
   }
 
   function navigate(dir) {
@@ -4495,6 +4520,22 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     render();
     window.scrollTo(0, 0);
   }
+
+  // Scrubbing: click or drag the progress bar to jump to any hadith
+  let dragging = false;
+  function seek(e) {
+    const rect = track.getBoundingClientRect();
+    const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const idx = Math.round(ratio * (entries.length - 1));
+    if (idx !== current) { current = idx; render(); }
+  }
+  track.addEventListener('mousedown', e => { dragging = true; seek(e); e.preventDefault(); });
+  window.addEventListener('mousemove', e => { if (dragging) seek(e); });
+  window.addEventListener('mouseup', () => { dragging = false; });
+  track.addEventListener('touchstart', e => { dragging = true; seek(e); }, { passive: true });
+  window.addEventListener('touchmove', e => { if (dragging) seek(e); }, { passive: true });
+  window.addEventListener('touchend', () => { dragging = false; });
 
   if (entries.length) render();
 </script>
