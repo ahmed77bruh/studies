@@ -7,8 +7,11 @@
 <title>مشكاة المصابيح — مذاكرة (Dark)</title>
 <style>
   :root {
-    --green: #2f8f5c;
-    --gold: #d9b968;
+    --green: #5C1A24;
+    --green-dark: #3D0F16;
+    --gold: #B8935F;
+    --gold-bright: #D4AF7A;
+    --gold-text: #1A0508;
     --cream: #15140f;
     --dark: #eae4d5;
     --card: #1f1e18;
@@ -39,7 +42,7 @@
 
   /* NAV */
   .nav-bar {
-    background: #145530;
+    background: var(--green-dark);
     padding: 10px 32px;
     display: flex;
     justify-content: space-between;
@@ -48,7 +51,7 @@
   }
   .nav-bar button {
     background: var(--gold);
-    color: #000;
+    color: var(--gold-text);
     border: none;
     padding: 8px 22px;
     border-radius: 6px;
@@ -61,7 +64,7 @@
   .nav-bar button:hover { opacity: 0.85; }
   .nav-bar button:disabled { background: #333; color: #777; cursor: default; }
   .nav-counter {
-    color: #cce8d8;
+    color: #e0c9a0;
     font-family: Georgia, serif;
     font-size: 0.9rem;
     text-align: center;
@@ -77,7 +80,7 @@
   .progress-track {
     position: relative;
     height: 22px;
-    background: #0d3d22;
+    background: var(--green-dark);
     border-bottom: 4px solid var(--gold);
     cursor: pointer;
     direction: ltr;
@@ -89,7 +92,7 @@
     position: absolute;
     top: 0; left: 0; bottom: 0;
     width: 0%;
-    background: linear-gradient(90deg, #b8973f, var(--gold) 60%, #ecd680);
+    background: linear-gradient(90deg, #8f6f42, var(--gold) 60%, var(--gold-bright));
     transition: width 0.12s ease;
   }
   .progress-knob {
@@ -100,7 +103,7 @@
     height: 34px;
     transform: translate(-50%, -50%);
     background: #fff7e2;
-    border: 2px solid #8a6d1f;
+    border: 2px solid #7a5c38;
     border-radius: 5px;
     box-shadow: 0 0 6px rgba(0,0,0,0.45);
     transition: left 0.12s ease;
@@ -128,7 +131,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    border-bottom: 3px solid var(--gold);
+    border-bottom: 3px solid rgba(184, 147, 95, 0.4);
   }
   .kitab-label {
     font-size: 0.7rem;
@@ -146,7 +149,7 @@
   .hadith-badge {
     display: inline-block;
     background: var(--gold);
-    color: #000;
+    color: var(--gold-text);
     font-size: 0.8rem;
     font-family: Georgia, serif;
     font-weight: bold;
@@ -162,7 +165,7 @@
     border: 1px solid var(--border);
     border-top: none;
     padding: 24px 22px;
-    border-bottom: 2px solid var(--gold);
+    border-bottom: 2px solid rgba(184, 147, 95, 0.4);
   }
   .matn-text {
     font-size: 1.35rem;
@@ -184,7 +187,7 @@
   .trans-block {
     background: var(--card);
     border: 1px solid var(--border);
-    border-top: 1px dashed #c9a84c88;
+    border-top: 1px dashed rgba(184, 147, 95, 0.4);
     padding: 14px 22px;
   }
   .trans-header {
@@ -255,14 +258,14 @@
   /* WORD MEANINGS */
   .meanings-block {
     background: #1a1912;
-    border-top: 1px dashed #c9a84c88;
+    border-top: 1px dashed rgba(184, 147, 95, 0.4);
     padding: 10px 22px 12px;
   }
   .meanings-header {
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #cfa964;
+    color: var(--gold);
     margin-bottom: 6px;
     direction: ltr;
     text-align: left;
@@ -286,7 +289,7 @@
   .meanings-list li:last-child { border: none; }
   .meanings-list li .word {
     font-weight: bold;
-    color: var(--green);
+    color: var(--gold);
     direction: rtl;
     font-size: 1.05rem;
     white-space: nowrap;
@@ -297,8 +300,8 @@
   .source-tag {
     display: inline-block;
     background: #23221a;
-    border: 1px solid #c9a84c55;
-    color: var(--green);
+    border: 1px solid rgba(184, 147, 95, 0.4);
+    color: var(--gold);
     font-size: 0.78rem;
     padding: 1px 8px;
     border-radius: 10px;
@@ -320,7 +323,7 @@
     gap: 10px;
   }
   .xref-label {
-    color: var(--green);
+    color: var(--gold);
     font-weight: bold;
     font-size: 0.78rem;
     font-family: Georgia, serif;
@@ -338,8 +341,8 @@
   }
 
   footer {
-    background: #145530;
-    color: #adc9bb;
+    background: var(--green-dark);
+    color: #d9c7b0;
     text-align: center;
     padding: 12px;
     font-size: 0.78rem;
@@ -347,14 +350,14 @@
   }
   /* inline clickable cross-reference to another hadith entry */
   .hlink {
-    color: #e0b84a;
+    color: var(--gold);
     cursor: pointer;
     text-decoration: underline;
     text-underline-offset: 2px;
     font-weight: 600;
     white-space: nowrap;
   }
-  .hlink:hover { color: #ffd77a; }
+  .hlink:hover { color: var(--gold-bright); }
 
   /* SLIDE / PDF-PAGE VIEW TOGGLE */
   .mode-toggle {
@@ -375,7 +378,7 @@
   }
   .mode-toggle span {
     font-size: 0.72rem;
-    color: var(--green);
+    color: var(--gold);
     font-weight: bold;
     letter-spacing: 0.4px;
     white-space: nowrap;
@@ -399,7 +402,7 @@
     transition: transform 0.2s;
     box-shadow: 0 1px 3px rgba(0,0,0,0.35);
   }
-  .switch input:checked + .slider { background: var(--green); }
+  .switch input:checked + .slider { background: var(--gold); }
   .switch input:checked + .slider::before { transform: translateX(17px); }
 
   /* Slide View: every hadith is stacked as its own page, one after another —
