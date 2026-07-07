@@ -646,8 +646,9 @@
   body.alfaaz-nums .alfaaz-numbtn { background: var(--gold); color: var(--gold-btn-text); }
   /* long phrase-words must wrap in the wider glossary column */
   #alfaaz-view .meanings-list li { align-items: flex-start; }
-  #alfaaz-view .meanings-list li .word { white-space: normal; }
+  #alfaaz-view .meanings-list li .word { white-space: normal; font-size: 1.15rem; }
   body.dark-mode #alfaaz-view .meanings-list li .word { color: #ffffff; }
+  body:not(.dark-mode) #alfaaz-view .meanings-list li .word { color: #1c1c1c; }
 
   @media (max-width: 640px) {
     .mode-toggle span { display: none; }
