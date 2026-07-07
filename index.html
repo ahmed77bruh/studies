@@ -620,13 +620,18 @@
     border-bottom: 3px solid var(--gold-border-soft);
     margin: 30px 0 16px;
   }
-  .alfaaz-hadith {
+  /* Default (numbers hidden): flat — no boxes, words/meanings run together line by line. */
+  .alfaaz-hadith { margin-bottom: 4px; }
+  #alfaaz-view .meanings-list { margin: 0; }
+  /* Numbers shown: restore the per-hadith card boxes. */
+  body.alfaaz-nums .alfaaz-hadith {
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 6px 20px 12px;
     margin-bottom: 14px;
   }
+  body.alfaaz-nums #alfaaz-view .meanings-list { margin: 8px 0; }
   .alfaaz-hnum {
     display: none;                 /* hadith numbers hidden by default; toggle reveals them */
     background: var(--gold);
@@ -639,21 +644,6 @@
   body.alfaaz-nums .alfaaz-hnum { display: inline-block; }
   .alfaaz-numbtn { margin-inline-start: 8px; }
   body.alfaaz-nums .alfaaz-numbtn { background: var(--gold); color: var(--gold-btn-text); }
-  /* Flat view: small bottom-right toggle → drop hadith numbers + dissolve the per-hadith
-     cards so every word/meaning runs together line by line. */
-  .alfaaz-flat-btn {
-    position: fixed; right: 20px; bottom: 20px; z-index: 60;
-    background: var(--card-bg); color: var(--accent-text);
-    border: 1px solid var(--gold); border-radius: 20px;
-    padding: 8px 14px; font-family: 'Amiri', 'Traditional Arabic', serif;
-    font-size: 0.95rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  }
-  body.alfaaz-flat .alfaaz-flat-btn { background: var(--gold); color: var(--gold-btn-text); }
-  body.alfaaz-flat #alfaaz-view .alfaaz-hnum { display: none !important; }
-  body.alfaaz-flat #alfaaz-view .alfaaz-hadith {
-    background: none; border: none; border-radius: 0; padding: 0; margin: 0;
-  }
-  body.alfaaz-flat #alfaaz-view .meanings-list { margin: 0; }
   /* long phrase-words must wrap in the wider glossary column */
   #alfaaz-view .meanings-list li { align-items: flex-start; }
   #alfaaz-view .meanings-list li .word { white-space: normal; }
@@ -8172,9 +8162,8 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   <div class="alfaaz-inner">
     <button class="alfaaz-close" id="alfaaz-close" title="Close">&#8594; رجوع</button>
     <button class="alfaaz-close alfaaz-numbtn" id="alfaaz-nums-toggle" title="Show / hide hadith numbers">&#35; إظهار الأرقام</button>
-    <button class="alfaaz-flat-btn" id="alfaaz-flat-toggle" title="Merge all words &amp; meanings into one continuous list (no hadith numbers)">&#9776; سَرْد مُتَّصِل</button>
     <h2 class="alfaaz-title">الْأَلْفَاظ</h2>
-    <div class="alfaaz-sub">Difficult words &amp; meanings from Mirqāt al-Mafātīḥ — كِتَابُ الْفِتَنِ &amp; كِتَابُ أَحْوَالِ الْقِيَامَةِ</div>
+    <div class="alfaaz-sub">Difficult words &amp; meanings from Mirqāt al-Mafātīḥ (cited below as “M”) — كِتَابُ الْفِتَنِ &amp; كِتَابُ أَحْوَالِ الْقِيَامَةِ</div>
 
     <div class="alfaaz-kitab">كِتَابُ الْفِتَنِ</div>
         <div class="alfaaz-hadith">
@@ -8188,7 +8177,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
         <div class="alfaaz-hadith">
           <div class="alfaaz-hnum">حديث ٥٣٧٩</div>
           <ul class="meanings-list">
-            <li><span class="word">عُودًا عُودًا</span><span class="defn">— stick by stick, one after another; Mirqat: just as a mat is woven by laying each reed consecutively, the فِتَن are presented to the heart one by one in sequence.</span></li>
+            <li><span class="word">عُودًا عُودًا</span><span class="defn">— stick by stick, one after another; M: just as a mat is woven by laying each reed consecutively, the فِتَن are presented to the heart one by one in sequence.</span></li>
             <li><span class="word">أُشْرِبَهَا</span><span class="defn">— was made to drink it / absorbed it; إِشْرَاب implies the فِتْنَة seeps into the heart the way a drink is absorbed into the body — leaving no trace it was rejected.</span></li>
             <li><span class="word">نَكَتَتْ / نُكِتَتْ</span><span class="defn">— left a mark/dot; النُّكْتَة = a small point or dot. One black dot for every فِتْنَة absorbed; one white dot for every فِتْنَة rejected.</span></li>
             <li><span class="word">الصَّفَا</span><span class="defn">— smooth white rock (with ص); chosen for its two qualities: بَيَاض (whiteness = purity) and صَلَابَة (hardness = imperviousness to fitan).</span></li>
@@ -8199,10 +8188,10 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
         <div class="alfaaz-hadith">
           <div class="alfaaz-hnum">حديث ٥٣٩٥</div>
           <ul class="meanings-list">
-            <li><span class="word">الْعِصْمَة</span><span class="defn">— Mirqat: طَرِيقُ النَّجَاةِ — the way of protection from falling into the شَرّ; answered with «السَّيْف» (Qatādah applied it to the ردة wars under Abū Bakr R.A.).</span></li>
-            <li><span class="word">أَقْذَاء</span><span class="defn">— Mirqat (al-Nihāya): plural of قَذًى (itself plural of قَذَاة) = the dust / straw / dirt that falls into the eye, water, or drink; al-Qāḍī: an إِمَارَة (rule) mixed with بِدَع and committing مَنَاهِي — the inner corruption likened to the قَذَى of the eye.</span></li>
-            <li><span class="word">دَخَن</span><span class="defn">— Mirqat: (two فَتْحَات) أَصْلُهُ الْكُدُورَة (turbidity) and a blackish hue; al-Qāḍī: مَعَ خِدَاعٍ وَنِفَاقٍ وَخِيَانَةٍ; al-Fāʾiq: outward صَلَاح over inner فَسَاد. The hadith itself glosses it: لَا تَرْجِعُ قُلُوبُ أَقْوَامٍ كَمَا كَانَتْ (hearts do not return to their former purity).</span></li>
-            <li><span class="word">هُدْنَة</span><span class="defn">— Mirqat: (ضَمَّة on the هَاء) = صُلْح — a truce / cessation of hostilities; here, an outward peace masking inner rancour.</span></li>
+            <li><span class="word">الْعِصْمَة</span><span class="defn">— M: طَرِيقُ النَّجَاةِ — the way of protection from falling into the شَرّ; answered with «السَّيْف» (Qatādah applied it to the ردة wars under Abū Bakr R.A.).</span></li>
+            <li><span class="word">أَقْذَاء</span><span class="defn">— M (al-Nihāya): plural of قَذًى (itself plural of قَذَاة) = the dust / straw / dirt that falls into the eye, water, or drink; al-Qāḍī: an إِمَارَة (rule) mixed with بِدَع and committing مَنَاهِي — the inner corruption likened to the قَذَى of the eye.</span></li>
+            <li><span class="word">دَخَن</span><span class="defn">— M: (two فَتْحَات) أَصْلُهُ الْكُدُورَة (turbidity) and a blackish hue; al-Qāḍī: مَعَ خِدَاعٍ وَنِفَاقٍ وَخِيَانَةٍ; al-Fāʾiq: outward صَلَاح over inner فَسَاد. The hadith itself glosses it: لَا تَرْجِعُ قُلُوبُ أَقْوَامٍ كَمَا كَانَتْ (hearts do not return to their former purity).</span></li>
+            <li><span class="word">هُدْنَة</span><span class="defn">— M: (ضَمَّة on the هَاء) = صُلْح — a truce / cessation of hostilities; here, an outward peace masking inner rancour.</span></li>
             <li><span class="word">عَاضٌّ عَلَى جَذْلِ شَجَرَةٍ</span><span class="defn">— عَاضّ (شَدَّة on the ضَاد) = gripping firmly / biting; جَذْل (كَسْرَة or فَتْحَة on the جِيم) = أَصْلُهَا — the root / stump of the tree. al-Qāḍī: a كِنَايَة for taking to العُزْلَة (isolation) and enduring the hardships of the age — like the saying "so-and-so bites on stones from the severity of pain."</span></li>
             <li><span class="word">الْمُهْر</span><span class="defn">— al-Tūrbishtī: (ضَمَّة, سُكُون on the هَاء) = وَلَدُ الْفَرَس (the foal); يُنْتَجُ = passive, يُولَد (is born) — born but not ridden before the Hour, so short is the time.</span></li>
             <li><span class="word">عَمْيَاءُ صَمَّاءُ</span><span class="defn">— blind and deaf (feminine, agreeing with فِتْنَة): a فِتْنَة so overwhelming it blinds people from الْحَقّ and deafens them from it.</span></li>
@@ -8211,14 +8200,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
         <div class="alfaaz-hadith">
           <div class="alfaaz-hnum">حديث ٥٣٩٦</div>
           <ul class="meanings-list">
-            <li><span class="word">رَدِيفًا</span><span class="defn">— Mirqat: راكبًا خلف — riding pillion behind the Prophet ﷺ; a sign of his ﷺ تَوَاضُع and of Abū Dharr's closeness.</span></li>
-            <li><span class="word">يُجْهِدَكَ الْجُوع</span><span class="defn">— Mirqat: (ضَمَّة يَاء, كَسْرَة هَاء) brings you to مَشَقَّة and disables you from even walking from house to mosque.</span></li>
-            <li><span class="word">تَعَفَّفْ</span><span class="defn">— Mirqat: الْتَزِمِ الْعِفَّة — الصَّلَاح, الوَرَع, patience over the pain of hunger, التَّقْوَى, and abstaining from الحَرَام / الشُّبْهَة and from begging the creation.</span></li>
-            <li><span class="word">يُبَاعُ الْقَبْرُ بِالْعَبْدِ</span><span class="defn">— Mirqat (al-Nihāya): الْبَيْت here = الْقَبْر; grave-space grows so scarce that a single grave is bought for a slave (or its price); Sharḥ al-Sunna adds: none can be found to dig a grave except for a slave's price.</span></li>
-            <li><span class="word">أَحْجَارُ الزَّيْتِ</span><span class="defn">— Mirqat: a quarter / place in Madinah; al-Tūrbishtī (al-Muyassar): it is part of the الْحَرَّة where the Battle of al-Ḥarra occurred under Yazid — the commander Muslim ibn ʿUqba al-Murrī violated the sanctity of the Prophet's ﷺ حَرَم, killed its men, ran rampant 3 (or 5) days, then died between the two حَرَم.</span></li>
-            <li><span class="word">تَغْمُرُ الدِّمَاءُ</span><span class="defn">— Mirqat: (سُكُون ghayn, ضَمَّة مِيم) تَسْتُر وتَعْلُو — the blood covers over and rises above (so great is the slaughter).</span></li>
-            <li><span class="word">تَأْتِي مَنْ أَنْتَ مِنْهُ</span><span class="defn">— Mirqat: خَبَر بمعنى الأمر — come to one who agrees with you in your دِين and سِيرَة; al-Qāḍī: return to your family / clan; al-Ṭībī: rather, return to your imam.</span></li>
-            <li><span class="word">شَارَكْتَ الْقَوْمَ إِذًا</span><span class="defn">— Mirqat: i.e. you would share in their إِثْم by taking up the weapon — so do not bear arms; remain with the imam and the people of righteousness and do not fight.</span></li>
+            <li><span class="word">رَدِيفًا</span><span class="defn">— M: راكبًا خلف — riding pillion behind the Prophet ﷺ; a sign of his ﷺ تَوَاضُع and of Abū Dharr's closeness.</span></li>
+            <li><span class="word">يُجْهِدَكَ الْجُوع</span><span class="defn">— M: (ضَمَّة يَاء, كَسْرَة هَاء) brings you to مَشَقَّة and disables you from even walking from house to mosque.</span></li>
+            <li><span class="word">تَعَفَّفْ</span><span class="defn">— M: الْتَزِمِ الْعِفَّة — الصَّلَاح, الوَرَع, patience over the pain of hunger, التَّقْوَى, and abstaining from الحَرَام / الشُّبْهَة and from begging the creation.</span></li>
+            <li><span class="word">يُبَاعُ الْقَبْرُ بِالْعَبْدِ</span><span class="defn">— M (al-Nihāya): الْبَيْت here = الْقَبْر; grave-space grows so scarce that a single grave is bought for a slave (or its price); Sharḥ al-Sunna adds: none can be found to dig a grave except for a slave's price.</span></li>
+            <li><span class="word">أَحْجَارُ الزَّيْتِ</span><span class="defn">— M: a quarter / place in Madinah; al-Tūrbishtī (al-Muyassar): it is part of the الْحَرَّة where the Battle of al-Ḥarra occurred under Yazid — the commander Muslim ibn ʿUqba al-Murrī violated the sanctity of the Prophet's ﷺ حَرَم, killed its men, ran rampant 3 (or 5) days, then died between the two حَرَم.</span></li>
+            <li><span class="word">تَغْمُرُ الدِّمَاءُ</span><span class="defn">— M: (سُكُون ghayn, ضَمَّة مِيم) تَسْتُر وتَعْلُو — the blood covers over and rises above (so great is the slaughter).</span></li>
+            <li><span class="word">تَأْتِي مَنْ أَنْتَ مِنْهُ</span><span class="defn">— M: خَبَر بمعنى الأمر — come to one who agrees with you in your دِين and سِيرَة; al-Qāḍī: return to your family / clan; al-Ṭībī: rather, return to your imam.</span></li>
+            <li><span class="word">شَارَكْتَ الْقَوْمَ إِذًا</span><span class="defn">— M: i.e. you would share in their إِثْم by taking up the weapon — so do not bear arms; remain with the imam and the people of righteousness and do not fight.</span></li>
             <li><span class="word">يَبْهَرَكَ شُعَاعُ السَّيْفِ / لِيَبُوءَ</span><span class="defn">— يَبْهَرَك = overwhelms/dazzles you (the gleam of the drawn sword sweeping you into the fighting); لِيَبُوءَ (from بَاءَ بِ = to return bearing a burden): so he returns bearing your sin (for slaying you unjustly) along with his own.</span></li>
           </ul>
         </div>
@@ -8660,7 +8649,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
           <div class="alfaaz-hnum">حديث ٥٦٦٣</div>
           <ul class="meanings-list">
             <li><span class="word">لَا تُدْرِكُهُ الْأَبْصَارُ</span><span class="defn">— eyes do not reach/encompass Him. Those who do إثبات of رُؤْيَة distinguish إدراك (encompassing) from رُؤْيَة (seeing) — the آية negates the former, not the latter.</span></li>
-            <li><span class="word">مِنْ وَرَاءِ حِجَابٍ</span><span class="defn">— from behind a veil/barrier. Mirqat: Aisha's (R.A.) نفي is ظَاهِرًا مُطْلَق (absolute negation of رُؤْيَة), though Ibn Hajar's جمع restricts it to رُؤْيَة بِالْبَصَر (eye-sight), leaving رُؤْيَة بِالْقَلْب open per Ibn Abbas's (R.A.) إثبات.</span></li>
+            <li><span class="word">مِنْ وَرَاءِ حِجَابٍ</span><span class="defn">— from behind a veil/barrier. M: Aisha's (R.A.) نفي is ظَاهِرًا مُطْلَق (absolute negation of رُؤْيَة), though Ibn Hajar's جمع restricts it to رُؤْيَة بِالْبَصَر (eye-sight), leaving رُؤْيَة بِالْقَلْب open per Ibn Abbas's (R.A.) إثبات.</span></li>
             <li><span class="word">قَفَّ شَعَرِي</span><span class="defn">— my hair stood on end; from the gravity of the matter, expressing awe at the enormity of the claim.</span></li>
           </ul>
         </div>
@@ -8672,7 +8661,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
             <li><span class="word">ضُعَفَاءُ النَّاسِ وَسَقَطُهُمْ وَغِرَّتُهُمْ</span><span class="defn">— the weak of people, their lowly ones, and their naive/simple-minded; those considered insignificant in worldly terms but who enter جَنَّة.</span></li>
             <li><span class="word">رِجْلَهُ</span><span class="defn">— His "foot" (a صِفَة خَبَرِيَّة affirmed with تَفْوِيض; نُؤْمِنُ بِهِ كَمَا جَاءَ without تَجْسِيم or تَعْطِيل).</span></li>
             <li><span class="word">قَطْ قَطْ</span><span class="defn">— enough! enough! النَّار announces its fullness; expression of satiation.</span></li>
-            <li><span class="word">الْمَاكَارِه</span><span class="defn">— difficult/burdensome things; linguistically = things disliked by the نَفْس; Mirqat: includes all مُكَلَّف obligations that require exertion.</span></li>
+            <li><span class="word">الْمَاكَارِه</span><span class="defn">— difficult/burdensome things; linguistically = things disliked by the نَفْس; M: includes all مُكَلَّف obligations that require exertion.</span></li>
           </ul>
         </div>
         <div class="alfaaz-hadith">
@@ -8698,7 +8687,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
           <ul class="meanings-list">
             <li><span class="word">نَحْنُ أَحَقُّ بِالشَّكِّ مِنْ إِبْرَاهِيمَ</span><span class="defn">— we are more entitled to doubt than Ibrahim A.S.; meaning: if even Ibrahim A.S. had reason to ask (for assurance), we certainly have even less reason to doubt — a rhetorical negation of doubt, not a confession of it.</span></li>
             <li><span class="word">رَبِّ أَرِنِي كَيْفَ تُحْيِي الْمَوْتَى</span><span class="defn">— "My Lord, show me how You give life to the dead" (Al-Baqarah 2:260); asked for اطْمِئْنَانُ الْقَلْب, not because of doubt in the principle.</span></li>
-            <li><span class="word">رُكْنٌ شَدِيدٌ</span><span class="defn">— a strong pillar/support; Lut A.S. expressed a wish for strong worldly backing; Mirqat: his real pillar was Allah.</span></li>
+            <li><span class="word">رُكْنٌ شَدِيدٌ</span><span class="defn">— a strong pillar/support; Lut A.S. expressed a wish for strong worldly backing; M: his real pillar was Allah.</span></li>
             <li><span class="word">لَأَجَبْتُ الدَّاعِيَ</span><span class="defn">— I would have responded to the caller; Yusuf A.S.'s preference to remain in prison rather than leave under false circumstances, showing his extraordinary تَقْوَى.</span></li>
           </ul>
         </div>
@@ -8789,7 +8778,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
         <div class="alfaaz-hadith">
           <div class="alfaaz-hnum">حديث ٥٧٣١</div>
           <ul class="meanings-list">
-            <li><span class="word">خَلَقْتُهُ بِيَدَيَّ</span><span class="defn">— I created him with My two hands; a صِفَة خَبَرِيَّة affirmed for Adam A.S. specifically; Mirqat: affirmed as a divine attribute befitting Allah's majesty, without تَجْسِيم.</span></li>
+            <li><span class="word">خَلَقْتُهُ بِيَدَيَّ</span><span class="defn">— I created him with My two hands; a صِفَة خَبَرِيَّة affirmed for Adam A.S. specifically; M: affirmed as a divine attribute befitting Allah's majesty, without تَجْسِيم.</span></li>
             <li><span class="word">وَنَفَخْتُ فِيهِ مِنْ رُوحِي</span><span class="defn">— and I breathed into him of My spirit; the نَفْخ الرُّوح is a separate divine act of honor for Adam A.S.; the إِضَافَة (My spirit) indicates honor, not that it is a part of Allah.</span></li>
             <li><span class="word">كُنْ فَكَانَ</span><span class="defn">— "Be, and it was"; the mode of creation for angels and all else — through divine command alone, without the specific honor of "by My hands."</span></li>
           </ul>
@@ -8806,7 +8795,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
           <ul class="meanings-list">
             <li><span class="word">نَبِيٌّ مُكَلَّمٌ</span><span class="defn">— a prophet spoken to directly by Allah; Adam A.S. received direct divine speech, establishing his prophethood.</span></li>
             <li><span class="word">جَمًّا غَفِيرًا</span><span class="defn">— a large overwhelming number; used here adverbially to indicate the vast multitude of messengers.</span></li>
-            <li><span class="word">أُولُو الْعَزْمِ</span><span class="defn">— those with firm resolve; Mirqat: the five greatest messengers who were given books and given the most demanding missions: Nuh, Ibrahim, Musa, Isa, and Muhammad (S.A.W.).</span></li>
+            <li><span class="word">أُولُو الْعَزْمِ</span><span class="defn">— those with firm resolve; M: the five greatest messengers who were given books and given the most demanding missions: Nuh, Ibrahim, Musa, Isa, and Muhammad (S.A.W.).</span></li>
           </ul>
         </div>
         <div class="alfaaz-hadith">
@@ -8814,7 +8803,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
           <ul class="meanings-list">
             <li><span class="word">لَيْسَ الْخَبَرُ كَالْمُعَايَنَةِ</span><span class="defn">— information (خَبَر) is not like direct witnessing (مُعَايَنَة); hearing about an event does not produce the same emotional and psychological effect as seeing it firsthand.</span></li>
             <li><span class="word">الْعِجْلُ</span><span class="defn">— the (golden) calf; the idol worshipped by Bani Isra'il in Musa's A.S. absence.</span></li>
-            <li><span class="word">الْأَلْوَاحُ</span><span class="defn">— the tablets; the divine tablets containing the Torah given to Musa A.S.; Mirqat: their benefit depended on the recipients' receptiveness — when Bani Isra'il fell into كُفْر, the tablets' purpose was nullified.</span></li>
+            <li><span class="word">الْأَلْوَاحُ</span><span class="defn">— the tablets; the divine tablets containing the Torah given to Musa A.S.; M: their benefit depended on the recipients' receptiveness — when Bani Isra'il fell into كُفْر, the tablets' purpose was nullified.</span></li>
           </ul>
         </div>
   </div>
@@ -8965,17 +8954,6 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   }
   setAlfaazNums(localStorage.getItem('mishkatAlfaazNums') === '1');
   alfaazNumsToggle.addEventListener('click', () => setAlfaazNums(!document.body.classList.contains('alfaaz-nums')));
-
-  // Flat/merged glossary view — bottom-right toggle; drops hadith numbers and runs every
-  // word/meaning together line by line. Persisted, defaults off.
-  const alfaazFlatToggle = document.getElementById('alfaaz-flat-toggle');
-  function setAlfaazFlat(on) {
-    document.body.classList.toggle('alfaaz-flat', on);
-    alfaazFlatToggle.innerHTML = on ? '▦ مُجَمَّع' : '☰ سَرْد مُتَّصِل';
-    localStorage.setItem('mishkatAlfaazFlat', on ? '1' : '0');
-  }
-  setAlfaazFlat(localStorage.getItem('mishkatAlfaazFlat') === '1');
-  alfaazFlatToggle.addEventListener('click', () => setAlfaazFlat(!document.body.classList.contains('alfaaz-flat')));
 </script>
 </body>
 </html>
