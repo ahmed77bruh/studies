@@ -651,8 +651,8 @@
   body:not(.dark-mode) #alfaaz-view .meanings-list li .word { color: #1c1c1c; }
   /* Sticky scrubber for the glossary — same progress-track as the main study,
      shown only while hadith numbers are visible (body.alfaaz-nums). */
-  #alfaaz-progress-track { display: none; }
-  body.alfaaz-nums #alfaaz-progress-track { display: block; position: sticky; top: 0; z-index: 55; }
+  #alfaaz-progress-track { display: none !important; }
+  body.alfaaz-nums #alfaaz-progress-track { display: block !important; position: sticky; top: 0; z-index: 55; }
 
   @media (max-width: 640px) {
     .mode-toggle span { display: none; }
