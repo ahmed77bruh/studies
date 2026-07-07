@@ -628,7 +628,7 @@
     margin-bottom: 14px;
   }
   .alfaaz-hnum {
-    display: inline-block;
+    display: none;                 /* hadith numbers hidden by default; toggle reveals them */
     background: var(--gold);
     color: var(--gold-badge-text);
     font-size: 0.95rem;
@@ -636,6 +636,9 @@
     border-radius: 14px;
     margin: 12px 0 4px;
   }
+  body.alfaaz-nums .alfaaz-hnum { display: inline-block; }
+  .alfaaz-numbtn { margin-inline-start: 8px; }
+  body.alfaaz-nums .alfaaz-numbtn { background: var(--gold); color: var(--gold-btn-text); }
   /* long phrase-words must wrap in the wider glossary column */
   #alfaaz-view .meanings-list li { align-items: flex-start; }
   #alfaaz-view .meanings-list li .word { white-space: normal; }
@@ -8153,6 +8156,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
 <section id="alfaaz-view">
   <div class="alfaaz-inner">
     <button class="alfaaz-close" id="alfaaz-close" title="Close">&#8594; رجوع</button>
+    <button class="alfaaz-close alfaaz-numbtn" id="alfaaz-nums-toggle" title="Show / hide hadith numbers">&#35; إظهار الأرقام</button>
     <h2 class="alfaaz-title">الْأَلْفَاظ</h2>
     <div class="alfaaz-sub">Difficult words &amp; meanings from Mirqāt al-Mafātīḥ — كِتَابُ الْفِتَنِ &amp; كِتَابُ أَحْوَالِ الْقِيَامَةِ</div>
 
@@ -8518,6 +8522,16 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   }
   alfaazBtn.addEventListener('click', () => setAlfaaz(!document.body.classList.contains('alfaaz-open')));
   alfaazClose.addEventListener('click', () => setAlfaaz(false));
+
+  // Hadith-number toggle for the glossary — default OFF (numbers hidden), persisted.
+  const alfaazNumsToggle = document.getElementById('alfaaz-nums-toggle');
+  function setAlfaazNums(on) {
+    document.body.classList.toggle('alfaaz-nums', on);
+    alfaazNumsToggle.innerHTML = on ? '# إخفاء الأرقام' : '# إظهار الأرقام';
+    localStorage.setItem('mishkatAlfaazNums', on ? '1' : '0');
+  }
+  setAlfaazNums(localStorage.getItem('mishkatAlfaazNums') === '1');
+  alfaazNumsToggle.addEventListener('click', () => setAlfaazNums(!document.body.classList.contains('alfaaz-nums')));
 </script>
 </body>
 </html>
