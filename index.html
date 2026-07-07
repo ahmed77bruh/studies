@@ -649,6 +649,10 @@
   #alfaaz-view .meanings-list li .word { white-space: normal; font-size: 1.15rem; }
   body.dark-mode #alfaaz-view .meanings-list li .word { color: #ffffff; }
   body:not(.dark-mode) #alfaaz-view .meanings-list li .word { color: #1c1c1c; }
+  /* Sticky scrubber for the glossary — same progress-track as the main study,
+     shown only while hadith numbers are visible (body.alfaaz-nums). */
+  #alfaaz-progress-track { display: none; }
+  body.alfaaz-nums #alfaaz-progress-track { display: block; position: sticky; top: 0; z-index: 55; }
 
   @media (max-width: 640px) {
     .mode-toggle span { display: none; }
@@ -8409,6 +8413,10 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
 
 <!-- ==================== الأَلْفَاظ — GLOSSARY SECTION ==================== -->
 <section id="alfaaz-view">
+  <div class="progress-track" id="alfaaz-progress-track" title="Drag to jump between hadiths">
+    <div class="progress-fill" id="alfaaz-progress-fill"></div>
+    <div class="progress-knob" id="alfaaz-progress-knob"></div>
+  </div>
   <div class="alfaaz-inner">
     <button class="alfaaz-close" id="alfaaz-close" title="Close">&#8594; رجوع</button>
     <button class="alfaaz-close alfaaz-numbtn" id="alfaaz-nums-toggle" title="Show / hide hadith numbers">&#35; إظهار الأرقام</button>
@@ -9684,6 +9692,46 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   }
   setAlfaazNums(localStorage.getItem('mishkatAlfaazNums') === '1');
   alfaazNumsToggle.addEventListener('click', () => setAlfaazNums(!document.body.classList.contains('alfaaz-nums')));
+
+  // Sticky scrubber for the glossary — same progress-track behavior as the main study
+  // (scroll-sync + drag-to-seek), but walking the .alfaaz-hadith blocks instead of
+  // .hadith-entry. Only active while body.alfaaz-nums is on (track is hidden otherwise).
+  const alfaazEntries = Array.from(document.querySelectorAll('#alfaaz-view .alfaaz-hadith'));
+  const alfaazTrack = document.getElementById('alfaaz-progress-track');
+  const alfaazFill = document.getElementById('alfaaz-progress-fill');
+  const alfaazKnob = document.getElementById('alfaaz-progress-knob');
+  function alfaazSyncProgressFromScroll() {
+    if (!document.body.classList.contains('alfaaz-nums') || !alfaazEntries.length) return;
+    const scrollPos = window.scrollY + 140;
+    let idx = 0;
+    for (let i = 0; i < alfaazEntries.length; i++) {
+      if (alfaazEntries[i].offsetTop <= scrollPos) idx = i; else break;
+    }
+    const pct = alfaazEntries.length > 1 ? (idx / (alfaazEntries.length - 1)) * 100 : 0;
+    alfaazFill.style.width = pct + '%';
+    alfaazKnob.style.left = pct + '%';
+  }
+  let alfaazScrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!document.body.classList.contains('alfaaz-open') || alfaazScrollTicking) return;
+    alfaazScrollTicking = true;
+    requestAnimationFrame(() => { alfaazSyncProgressFromScroll(); alfaazScrollTicking = false; });
+  }, { passive: true });
+  let alfaazDragging = false;
+  function alfaazSeek(e) {
+    if (!alfaazEntries.length) return;
+    const rect = alfaazTrack.getBoundingClientRect();
+    const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const idx = Math.round(ratio * (alfaazEntries.length - 1));
+    alfaazEntries[idx].scrollIntoView({ block: 'start' });
+  }
+  alfaazTrack.addEventListener('mousedown', e => { alfaazDragging = true; alfaazSeek(e); e.preventDefault(); });
+  window.addEventListener('mousemove', e => { if (alfaazDragging) alfaazSeek(e); });
+  window.addEventListener('mouseup', () => { alfaazDragging = false; });
+  alfaazTrack.addEventListener('touchstart', e => { alfaazDragging = true; alfaazSeek(e); }, { passive: true });
+  window.addEventListener('touchmove', e => { if (alfaazDragging) alfaazSeek(e); }, { passive: true });
+  window.addEventListener('touchend', () => { alfaazDragging = false; });
 </script>
 </body>
 </html>
