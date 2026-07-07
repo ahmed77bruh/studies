@@ -639,6 +639,21 @@
   body.alfaaz-nums .alfaaz-hnum { display: inline-block; }
   .alfaaz-numbtn { margin-inline-start: 8px; }
   body.alfaaz-nums .alfaaz-numbtn { background: var(--gold); color: var(--gold-btn-text); }
+  /* Flat view: small bottom-right toggle → drop hadith numbers + dissolve the per-hadith
+     cards so every word/meaning runs together line by line. */
+  .alfaaz-flat-btn {
+    position: fixed; right: 20px; bottom: 20px; z-index: 60;
+    background: var(--card-bg); color: var(--accent-text);
+    border: 1px solid var(--gold); border-radius: 20px;
+    padding: 8px 14px; font-family: 'Amiri', 'Traditional Arabic', serif;
+    font-size: 0.95rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  body.alfaaz-flat .alfaaz-flat-btn { background: var(--gold); color: var(--gold-btn-text); }
+  body.alfaaz-flat #alfaaz-view .alfaaz-hnum { display: none !important; }
+  body.alfaaz-flat #alfaaz-view .alfaaz-hadith {
+    background: none; border: none; border-radius: 0; padding: 0; margin: 0;
+  }
+  body.alfaaz-flat #alfaaz-view .meanings-list { margin: 0; }
   /* long phrase-words must wrap in the wider glossary column */
   #alfaaz-view .meanings-list li { align-items: flex-start; }
   #alfaaz-view .meanings-list li .word { white-space: normal; }
@@ -8157,6 +8172,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   <div class="alfaaz-inner">
     <button class="alfaaz-close" id="alfaaz-close" title="Close">&#8594; رجوع</button>
     <button class="alfaaz-close alfaaz-numbtn" id="alfaaz-nums-toggle" title="Show / hide hadith numbers">&#35; إظهار الأرقام</button>
+    <button class="alfaaz-flat-btn" id="alfaaz-flat-toggle" title="Merge all words &amp; meanings into one continuous list (no hadith numbers)">&#9776; سَرْد مُتَّصِل</button>
     <h2 class="alfaaz-title">الْأَلْفَاظ</h2>
     <div class="alfaaz-sub">Difficult words &amp; meanings from Mirqāt al-Mafātīḥ — كِتَابُ الْفِتَنِ &amp; كِتَابُ أَحْوَالِ الْقِيَامَةِ</div>
 
@@ -8925,6 +8941,17 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   }
   setAlfaazNums(localStorage.getItem('mishkatAlfaazNums') === '1');
   alfaazNumsToggle.addEventListener('click', () => setAlfaazNums(!document.body.classList.contains('alfaaz-nums')));
+
+  // Flat/merged glossary view — bottom-right toggle; drops hadith numbers and runs every
+  // word/meaning together line by line. Persisted, defaults off.
+  const alfaazFlatToggle = document.getElementById('alfaaz-flat-toggle');
+  function setAlfaazFlat(on) {
+    document.body.classList.toggle('alfaaz-flat', on);
+    alfaazFlatToggle.innerHTML = on ? '▦ مُجَمَّع' : '☰ سَرْد مُتَّصِل';
+    localStorage.setItem('mishkatAlfaazFlat', on ? '1' : '0');
+  }
+  setAlfaazFlat(localStorage.getItem('mishkatAlfaazFlat') === '1');
+  alfaazFlatToggle.addEventListener('click', () => setAlfaazFlat(!document.body.classList.contains('alfaaz-flat')));
 </script>
 </body>
 </html>
