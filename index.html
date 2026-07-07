@@ -642,7 +642,13 @@
     margin: 12px 0 4px;
   }
   body.alfaaz-nums .alfaaz-hnum { display: inline-block; }
-  .alfaaz-numbtn { margin-inline-start: 8px; }
+  .alfaaz-numbtn {
+    position: fixed;
+    bottom: 22px;
+    right: 18px;
+    z-index: 60;
+    box-shadow: 0 3px 12px var(--toggle-shadow);
+  }
   body.alfaaz-nums .alfaaz-numbtn { background: var(--gold); color: var(--gold-btn-text); }
   /* long phrase-words must wrap in the wider glossary column */
   #alfaaz-view .meanings-list li { align-items: flex-start; }
