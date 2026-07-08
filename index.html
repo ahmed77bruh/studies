@@ -9151,9 +9151,9 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     <div class="progress-knob" id="alfaaz-progress-knob"></div>
   </div>
   <div class="alfaaz-inner">
-    <button class="alfaaz-close" id="alfaaz-close" title="Close">&#8594; رجوع</button>
-    <button class="alfaaz-close alfaaz-numbtn" id="alfaaz-nums-toggle" title="Show / hide hadith numbers">&#35; إظهار الأرقام</button>
-    <button class="alfaaz-close" id="alfaaz-game-btn" title="Play a word-meaning game">🎮 لُعْبَة</button>
+    <button class="alfaaz-close" id="alfaaz-close" title="Close">&#8594; Back</button>
+    <button class="alfaaz-close alfaaz-numbtn" id="alfaaz-nums-toggle" title="Show / hide hadith numbers">&#35; Numbers</button>
+    <button class="alfaaz-close" id="alfaaz-game-btn" title="Play a word-meaning game">🎮 Game</button>
     <h2 class="alfaaz-title">الْأَلْفَاظ</h2>
     <div class="alfaaz-sub">Difficult words &amp; meanings from Mirqāt al-Mafātīḥ (cited below as “M”) — كِتَابُ الْفِتَنِ &amp; كِتَابُ أَحْوَالِ الْقِيَامَةِ</div>
 
@@ -11283,6 +11283,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
           </ul>
         </div>
         <div class="alfaaz-hadith">
+          <div class="alfaaz-hnum">حديث ٥٦٧٠</div>
+          <ul class="meanings-list">
+            <li><span class="word">مِنْهُمْ مَنْ تَأْخُذُهُ النَّارُ إِلَى كَعْبَيْهِ، وَمِنْهُمْ مَنْ تَأْخُذُهُ إِلَى رُكْبَتَيْهِ</span><span class="defn">— among the disbelievers, some are seized by the Fire up to their ankles, some up to their knees — punishment varying in severity, not that part of a person suffers while another part does not.</span></li>
+            <li><span class="word">حُجْزَتِهِ</span><span class="defn">— (ḥujzah) the point where the waist-wrapper (إِزَار) is tied — i.e. up to his waist/midsection.</span></li>
+            <li><span class="word">تَرْقُوَتِهِ</span><span class="defn">— (tarquwah) his collarbone — up to his throat; per النِّهَايَة, the bone between the hollow of the throat and the shoulder.</span></li>
+          </ul>
+        </div>
+        <div class="alfaaz-hadith">
           <div class="alfaaz-hnum">حديث ٥٦٩٣</div>
           <ul class="meanings-list">
             <li><span class="word">تَحَاجَّتِ</span><span class="defn">— they disputed/argued with each other; from الحجاج = presenting proofs; a mutual debate.</span></li>
@@ -11440,9 +11448,9 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     <div id="alfaaz-game" class="alfaaz-game">
       <div class="game-sub">Test yourself on the glossary above — pick a mode.</div>
       <div class="game-modes">
-        <button class="game-mode-btn active" data-mode="flash">🃏 بِطَاقَات</button>
-        <button class="game-mode-btn" data-mode="match">🧩 تَوْصِيل</button>
-        <button class="game-mode-btn" data-mode="quiz">✅ اِخْتِبَار</button>
+        <button class="game-mode-btn active" data-mode="flash">🃏 Flashcards</button>
+        <button class="game-mode-btn" data-mode="match">🧩 Match</button>
+        <button class="game-mode-btn" data-mode="quiz">✅ Quiz</button>
       </div>
 
       <div id="game-flash" class="game-panel">
@@ -11455,29 +11463,29 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
         </div>
         <div class="game-hint">tap the card to flip</div>
         <div class="flash-controls">
-          <button class="alfaaz-close" id="flash-prev">◀ السَّابِق</button>
-          <button class="alfaaz-close" id="flash-shuffle">🔀 خَلْط</button>
-          <button class="alfaaz-close" id="flash-next">التَّالِي ▶</button>
+          <button class="alfaaz-close" id="flash-prev">◀ Previous</button>
+          <button class="alfaaz-close" id="flash-shuffle">🔀 Shuffle</button>
+          <button class="alfaaz-close" id="flash-next">Next ▶</button>
         </div>
       </div>
 
       <div id="game-match" class="game-panel" style="display:none">
         <div class="match-header">
           <div class="match-timer">⏱ <span id="match-time">0.0</span>s</div>
-          <button class="alfaaz-close" id="match-new">🔀 جَوْلَة جَدِيدَة</button>
+          <button class="alfaaz-close" id="match-new">🔀 New Round</button>
         </div>
         <div class="match-grid" id="match-grid"></div>
         <div class="match-done" id="match-done" style="display:none">
-          🎉 أَحْسَنْت! <span id="match-final-time"></span>s
-          <div><button class="alfaaz-close" id="match-again">اِلْعَبْ مَرَّة أُخْرَى</button></div>
+          🎉 Nice! <span id="match-final-time"></span>s
+          <div><button class="alfaaz-close" id="match-again">Play Again</button></div>
         </div>
       </div>
 
       <div id="game-quiz" class="game-panel" style="display:none">
         <div class="quiz-body">
           <div class="quiz-header">
-            <div class="quiz-progress">السُّؤَال <span id="quiz-idx">1</span> / <span id="quiz-total">50</span></div>
-            <div class="quiz-score">النَّتِيجَة: <span id="quiz-score">0</span></div>
+            <div class="quiz-progress">Question <span id="quiz-idx">1</span> / <span id="quiz-total">50</span></div>
+            <div class="quiz-score">Score: <span id="quiz-score">0</span></div>
           </div>
           <div class="quiz-prompt" id="quiz-prompt"></div>
           <div class="quiz-options" id="quiz-options"></div>
@@ -11628,7 +11636,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const alfaazNumsToggle = document.getElementById('alfaaz-nums-toggle');
   function setAlfaazNums(on) {
     document.body.classList.toggle('alfaaz-nums', on);
-    alfaazNumsToggle.innerHTML = on ? '# إخفاء الأرقام' : '# إظهار الأرقام';
+    alfaazNumsToggle.innerHTML = on ? '# Hide Numbers' : '# Numbers';
     localStorage.setItem('mishkatAlfaazNums', on ? '1' : '0');
   }
   setAlfaazNums(localStorage.getItem('mishkatAlfaazNums') === '1');
@@ -11681,7 +11689,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     const gameBtn = document.getElementById('alfaaz-game-btn');
     function setAlfaazGame(on) {
       document.body.classList.toggle('alfaaz-game-open', on);
-      gameBtn.innerHTML = on ? '📖 قَائِمَة الْكَلِمَات' : '🎮 لُعْبَة';
+      gameBtn.innerHTML = on ? '📖 Word List' : '🎮 Game';
       if (on) initGameData();
     }
     gameBtn.addEventListener('click', () => setAlfaazGame(!document.body.classList.contains('alfaaz-game-open')));
@@ -11799,8 +11807,8 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     function finishQuiz() {
       quizBody.style.display = 'none';
       quizFinal.style.display = '';
-      quizFinal.innerHTML = '🎉 النَّتِيجَة النِّهَائِيَّة: ' + quizScore + ' / ' + quizOrder.length +
-        '<br><button class="alfaaz-close" id="quiz-again">اِلْعَبْ مَرَّة أُخْرَى</button>';
+      quizFinal.innerHTML = '🎉 Final Score: ' + quizScore + ' / ' + quizOrder.length +
+        '<br><button class="alfaaz-close" id="quiz-again">Play Again</button>';
       document.getElementById('quiz-again').addEventListener('click', startQuiz);
     }
 
