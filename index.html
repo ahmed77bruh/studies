@@ -668,6 +668,176 @@
     .alfaaz-title { font-size: 2rem; }
     .alfaaz-kitab { font-size: 1.25rem; }
   }
+
+  /* ==================== الأَلْفَاظ — GAME (Flashcards / Match / Quiz) ==================== */
+  #alfaaz-glossary { display: block; }
+  .alfaaz-game { display: none; }
+  body.alfaaz-game-open #alfaaz-glossary { display: none; }
+  body.alfaaz-game-open .alfaaz-game { display: block; }
+  body.alfaaz-game-open #alfaaz-progress-track,
+  body.alfaaz-game-open .alfaaz-numbtn { display: none !important; }
+
+  .game-sub {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-takhrij);
+    margin-bottom: 18px;
+  }
+  .game-modes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 26px;
+    flex-wrap: wrap;
+  }
+  .game-mode-btn {
+    border: 1px solid var(--gold-border-soft);
+    background: var(--card-bg);
+    color: var(--text-main);
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  .game-mode-btn.active { background: var(--gold); color: var(--gold-btn-text); border-color: var(--gold); }
+  .game-panel { max-width: 520px; margin: 0 auto; }
+  .game-hint {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-takhrij);
+    margin: 10px 0;
+  }
+
+  /* Flashcards */
+  .flash-counter { text-align: center; color: var(--text-takhrij); font-size: 0.9rem; margin-bottom: 10px; }
+  .flashcard { perspective: 1200px; cursor: pointer; }
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    min-height: 240px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .flashcard-inner.flipped { transform: rotateY(180deg); }
+  .flashcard-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 3px 14px var(--toggle-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 26px;
+    text-align: center;
+    overflow-y: auto;
+  }
+  .flashcard-front {
+    direction: rtl;
+    font-weight: bold;
+    color: var(--accent-text);
+    font-size: 1.5rem;
+    line-height: 1.9;
+  }
+  .flashcard-back {
+    direction: ltr;
+    color: var(--text-defn);
+    font-size: 1rem;
+    line-height: 1.6;
+    transform: rotateY(180deg);
+  }
+  .flash-controls { display: flex; justify-content: center; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .flash-controls button { margin-bottom: 0; }
+
+  /* Match */
+  .match-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .match-timer { font-size: 1rem; color: var(--text-main); }
+  .match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+  .match-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 0.82rem;
+    line-height: 1.35;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: opacity 0.35s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .match-card.word { direction: rtl; font-weight: bold; color: var(--accent-text); }
+  .match-card.defn { direction: ltr; color: var(--text-defn); }
+  .match-card.selected { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-border-soft); }
+  .match-card.correct { background: rgba(60, 180, 100, 0.25); border-color: #2e9d55; }
+  .match-card.wrong { background: rgba(220, 80, 80, 0.25); border-color: #c94b4b; }
+  .match-card.matched { opacity: 0; pointer-events: none; }
+  .match-done {
+    text-align: center;
+    margin-top: 18px;
+    padding: 16px;
+    border: 1px solid var(--gold-border-soft);
+    border-radius: 10px;
+    background: var(--meanings-bg);
+    color: var(--text-main);
+  }
+  .match-done button { margin-top: 10px; margin-bottom: 0; }
+
+  /* Quiz */
+  .quiz-header { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-takhrij); margin-bottom: 14px; }
+  .quiz-prompt {
+    direction: rtl;
+    text-align: center;
+    font-weight: bold;
+    color: var(--accent-text);
+    font-size: 1.4rem;
+    background: var(--meanings-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-option {
+    direction: ltr;
+    text-align: left;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    color: var(--text-defn);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .quiz-option.correct { background: rgba(60, 180, 100, 0.25); border-color: #2e9d55; }
+  .quiz-option.wrong { background: rgba(220, 80, 80, 0.25); border-color: #c94b4b; }
+  .quiz-option.disabled { cursor: default; }
+  .quiz-final {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid var(--gold-border-soft);
+    border-radius: 10px;
+    background: var(--meanings-bg);
+    color: var(--text-main);
+    font-size: 1.1rem;
+  }
+  .quiz-final button { margin-top: 12px; margin-bottom: 0; }
+
+  @media (max-width: 640px) {
+    .flashcard-inner { min-height: 200px; }
+    .flashcard-front { font-size: 1.25rem; }
+    .match-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+  }
 </style>
 </head>
 <body>
@@ -7554,6 +7724,62 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   </div>
   <!-- ==================== END 5406 ==================== -->
 
+  <!-- ==================== HADITH 5409 ==================== -->
+  <div class="hadith-entry" data-num="5409">
+
+    <div class="kitab-bab">
+      <span class="kitab-label">Kitab</span>
+      <span class="kitab-text">كِتَابُ الْفِتَنِ</span>
+      <span class="bab-text">بَابُ الْمَلَاحِمِ — الفصل الأول</span>
+    </div>
+
+    <div class="matn-block">
+      <div class="hadith-badge">حديث ٥٤٠٩</div>
+      <div class="matn-text">
+        عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ: «لَا تَقُومُ السَّاعَةُ حَتَّى تَقْتَتِلَ فِئَتَانِ عَظِيمَتَانِ، تَكُونُ بَيْنَهُمَا مَقْتَلَةٌ عَظِيمَةٌ، دَعَوَاهُمَا وَاحِدَةٌ، وَحَتَّى يُبْعَثَ دَجَّالُونَ كَذَّابُونَ، قَرِيبًا مِنْ ثَلَاثِينَ، كُلُّهُمْ يَزْعُمُ أَنَّهُ رَسُولُ اللَّهِ، وَحَتَّى يُقْبَضَ الْعِلْمُ، وَتَكْثُرَ الزَّلَازِلُ، وَيَتَقَارَبَ الزَّمَانُ، وَتَظْهَرَ الْفِتَنُ، وَيَكْثُرَ الْهَرْجُ وَهُوَ الْقَتْلُ، وَحَتَّى يَكْثُرَ فِيكُمُ الْمَالُ فَيَفِيضَ، حَتَّى يُهِمَّ رَبَّ الْمَالِ مَنْ يَقْبَلُ صَدَقَتَهُ، وَحَتَّى يَعْرِضَهُ فَيَقُولُ الَّذِي يُعْرَضُ عَلَيْهِ: لَا أَرَبَ لِي بِهِ، وَحَتَّى يَتَطَاوَلَ النَّاسُ فِي الْبُنْيَانِ، وَحَتَّى يَمُرَّ الرَّجُلُ بِقَبْرِ الرَّجُلِ فَيَقُولُ: يَا لَيْتَنِي مَكَانَهُ، وَحَتَّى تَطْلُعَ الشَّمْسُ مِنْ مَغْرِبِهَا، فَإِذَا طَلَعَتْ وَرَآهَا النَّاسُ آمَنُوا أَجْمَعُونَ، فَذَلِكَ حِينَ ﴿لَا يَنْفَعُ نَفْسًا إِيمَانُهَا لَمْ تَكُنْ آمَنَتْ مِنْ قَبْلُ أَوْ كَسَبَتْ فِي إِيمَانِهَا خَيْرًا﴾، وَلَتَقُومَنَّ السَّاعَةُ وَقَدْ نَشَرَ الرَّجُلَانِ ثَوْبَهُمَا بَيْنَهُمَا، فَلَا يَتَبَايَعَانِهِ وَلَا يَطْوِيَانِهِ، وَلَتَقُومَنَّ السَّاعَةُ وَقَدِ انْصَرَفَ الرَّجُلُ بِلَبَنِ لِقْحَتِهِ فَلَا يَطْعَمُهُ، وَلَتَقُومَنَّ السَّاعَةُ وَهُوَ يُلِيطُ حَوْضَهُ فَلَا يَسْقِي فِيهِ، وَلَتَقُومَنَّ السَّاعَةُ وَقَدْ رَفَعَ أُكْلَتَهُ إِلَى فِيهِ فَلَا يَطْعَمُهَا». مُتَّفَقٌ عَلَيْهِ.
+      </div>
+      <div class="takhrij">Narrated by Abū Hurayrah (R.A.) &nbsp;·&nbsp; Riwayah: al-Bukhari and Muslim (Muttafaq ʿAlayh)</div>
+    </div>
+
+    <div class="trans-block">
+      <div class="trans-header">Translation</div>
+      <p class="trans-text">The Prophet ﷺ said: "The Hour will not come until two great groups fight one another, a great slaughter occurring between them, though their claim (of religion) is one and the same; and until about thirty lying deceivers are sent forth, each of them claiming to be a messenger of Allah; and until knowledge is taken away, earthquakes increase, time passes in a hurry, tribulations appear, and killing increases; and until wealth becomes so abundant among you that it overflows — so much so that the owner of wealth becomes anxious over who will accept his charity, and when he offers it to someone, the one to whom it is offered says, 'I have no need of it'; and until people compete with one another in raising tall buildings; and until a man passes by another man's grave and says, 'Would that I were in his place!'; and until the sun rises from the west — and when it rises and the people see it, they will all believe, but that is the moment when 'no soul's faith will benefit it if it did not believe before, or earn some good through its faith' [Q 6:158]. And the Hour will indeed come while two men have spread out a garment for trade between them, and they will neither complete the sale nor fold it up again; and the Hour will indeed come while a man is walking away with the milk of his she-camel, and he will not get to drink it; and the Hour will indeed come while a man is plastering his watering-trough, and he will not get to water [his animals] from it; and the Hour will indeed come while a man has raised a mouthful of food to his mouth, and he will not get to eat it."</p>
+    </div>
+
+    <div class="notes-block">
+      <div class="notes-header">Class Notes</div>
+      <ul class="notes-list">
+        <li>Ibn al-Malak: the two great فِئَتَانِ (groups) whose دَعْوَى was one and the same are ʿAlī and Muʿāwiyah (R.A.) and those with them — Rasūlullāh ﷺ did not criticize either side, since both claimed the same دَعْوَى (Islam).</li>
+        <li>دَجَّال refers to one who lies and deceives — it can even mean simply "a liar." So in the sense of deception, treachery, and concealment, there are many دجّالون; but the Dajjāl who will be killed by ʿĪsā (A.S.) will be the greatest of them all. The مُرَاد of دجّالون in this ḥadīth is specifically those who falsely claim نُبُوَّة. Countless people throughout history have falsely claimed prophethood, but the vast majority of these claims arise from جُنُون (insanity), so the ḥadīth does not count them among the "thirty" — rather, the مُرَاد here are only those who had power, strength, acceptance, authority, and a large following.</li>
+        <li>زَلَازِل (earthquakes) could refer to physical earthquakes, or to مَعْنَوِي ("metaphorical") earthquakes — meaning the shaking-up of people's lives and circumstances.</li>
+      </ul>
+    </div>
+
+    <div class="meanings-block">
+      <div class="meanings-header">Word Meanings — Mirqat</div>
+      <ul class="meanings-list">
+        <li><span class="word">تَقْتَتِلَ فِئَتَانِ عَظِيمَتَانِ، دَعَوَاهُمَا وَاحِدَةٌ</span><span class="defn">— two great groups fight, each claiming (دَعْوَى) the same thing — i.e. each claims to be upon Islam; Ibn al-Malak identifies them as the parties of ʿAlī and Muʿāwiyah (R.A.), and notes this rebuts the Khawārij's takfīr of both sides.</span></li>
+        <li><span class="word">دَجَّالُونَ كَذَّابُونَ ... كُلُّهُمْ يَزْعُمُ أَنَّهُ رَسُولُ اللَّهِ</span><span class="defn">— Sharḥ al-Sunnah: every كَذَّاب is in essence a دَجَّال (one who "covers over" the truth with falsehood, دَجَلَ = to deceive/conceal). "Nearly thirty" does not contradict the more precise "thirty" elsewhere — either a later, more exact count, or simply an approximation.</span></li>
+        <li><span class="word">يُقْبَضَ الْعِلْمُ</span><span class="defn">— beneficial knowledge tied to the Qur'an and Sunnah is "seized" (taken away) through the death of the scholars of Ahl al-Sunnah, so that people of ignorance and innovation multiply.</span></li>
+        <li><span class="word">يَتَقَارَبَ الزَّمَانُ</span><span class="defn">— Khaṭṭābī: refers to the time of the Mahdī — because of the ease and justice of that era, its days feel short in retrospect (as ease is always felt to pass quickly, hardship to drag on).</span></li>
+        <li><span class="word">الْهَرْجُ</span><span class="defn">— glossed in the ḥadīth itself as الْقَتْل (killing); its "increase" is understood as its spreading and becoming constant.</span></li>
+        <li><span class="word">لَا أَرَبَ لِي بِهِ</span><span class="defn">— "I have no need of it" — said out of contentment (قَنَاعَة) with what one already has, no longer desiring more than sufficiency.</span></li>
+        <li><span class="word">يَتَطَاوَلَ النَّاسُ فِي الْبُنْيَانِ</span><span class="defn">— people compete in the height/adornment of their buildings, boasting over their construction.</span></li>
+        <li><span class="word">يَا لَيْتَنِي مَكَانَهُ</span><span class="defn">— "would that I were in his place" — said from the sheer weight of worldly grief and trial, wishing for death rather than witnessing the fitnah.</span></li>
+        <li><span class="word">تَطْلُعَ الشَّمْسُ مِنْ مَغْرِبِهَا</span><span class="defn">— once this sign is seen, belief and repentance are no longer accepted from anyone — per the authentic ḥadīth, "repentance remains accepted until its door is shut, and it is shut when the sun rises from the west."</span></li>
+        <li><span class="word">نَشَرَ الرَّجُلَانِ ثَوْبَهُمَا ... فَلَا يَتَبَايَعَانِهِ وَلَا يَطْوِيَانِهِ</span><span class="defn">— two men mid-transaction, garment spread out between them for sale — the Hour seizes them before they can finish buying/selling or even pack it away; illustrating that the Hour comes suddenly, catching people in the midst of their affairs (cf. Q 36:49–50, Q 7:187).</span></li>
+        <li><span class="word">يُلِيطُ حَوْضَهُ</span><span class="defn">— plastering/repairing his watering-trough (to water his camels or sheep) — caught mid-task, unable to finish.</span></li>
+      </ul>
+    </div>
+
+    <div class="xref-block">
+      <span class="xref-label">Cross-ref:</span>
+      <span class="xref-text">Bukhārī &amp; Muslim (Muttafaq ʿAlayh). Verified in Mirqat (كِتَابُ الْفِتَنِ، بَابُ الْمَلَاحِمِ، الفصل الأول — Shamela 8176, page-ids 7459–7461, printed ٥٤١٠): Ibn al-Malak on the two فِئَتَان being ʿAlī/Muʿāwiyah; Sharḥ al-Sunnah on دَجَّال = كَذَّاب; al-Khaṭṭābī on يَتَقَارَبَ الزَّمَانُ = زَمَانُ الْمَهْدِيّ. Lamʿāt &amp; Badhl al-Majhūd cross-ref pending.</span>
+    </div>
+
+  </div>
+  <!-- ==================== END 5409 ==================== -->
+
   <!-- ==================== HADITH 5658 ==================== -->
   <div class="hadith-entry" data-num="5658">
 
@@ -8426,9 +8652,11 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   <div class="alfaaz-inner">
     <button class="alfaaz-close" id="alfaaz-close" title="Close">&#8594; رجوع</button>
     <button class="alfaaz-close alfaaz-numbtn" id="alfaaz-nums-toggle" title="Show / hide hadith numbers">&#35; إظهار الأرقام</button>
+    <button class="alfaaz-close" id="alfaaz-game-btn" title="Play a word-meaning game">🎮 لُعْبَة</button>
     <h2 class="alfaaz-title">الْأَلْفَاظ</h2>
     <div class="alfaaz-sub">Difficult words &amp; meanings from Mirqāt al-Mafātīḥ (cited below as “M”) — كِتَابُ الْفِتَنِ &amp; كِتَابُ أَحْوَالِ الْقِيَامَةِ</div>
 
+    <div id="alfaaz-glossary">
     <div class="alfaaz-kitab">كِتَابُ الْفِتَنِ</div>
         <div class="alfaaz-hadith">
           <div class="alfaaz-hnum">حديث ٥٣٧٨</div>
@@ -10341,6 +10569,56 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
             <li><span class="word">الْأَلْوَاحُ</span><span class="defn">— the tablets; the divine tablets containing the Torah given to Musa A.S.; M: their benefit depended on the recipients' receptiveness — when Bani Isra'il fell into كُفْر, the tablets' purpose was nullified.</span></li>
           </ul>
         </div>
+    </div>
+    <!-- ==================== الأَلْفَاظ — GAME VIEW ==================== -->
+    <div id="alfaaz-game" class="alfaaz-game">
+      <div class="game-sub">Test yourself on the glossary above — pick a mode.</div>
+      <div class="game-modes">
+        <button class="game-mode-btn active" data-mode="flash">🃏 بِطَاقَات</button>
+        <button class="game-mode-btn" data-mode="match">🧩 تَوْصِيل</button>
+        <button class="game-mode-btn" data-mode="quiz">✅ اِخْتِبَار</button>
+      </div>
+
+      <div id="game-flash" class="game-panel">
+        <div class="flash-counter"><span id="flash-idx">1</span> / <span id="flash-total">0</span></div>
+        <div class="flashcard" id="flashcard">
+          <div class="flashcard-inner" id="flashcard-inner">
+            <div class="flashcard-face flashcard-front" id="flashcard-front"></div>
+            <div class="flashcard-face flashcard-back" id="flashcard-back"></div>
+          </div>
+        </div>
+        <div class="game-hint">tap the card to flip</div>
+        <div class="flash-controls">
+          <button class="alfaaz-close" id="flash-prev">◀ السَّابِق</button>
+          <button class="alfaaz-close" id="flash-shuffle">🔀 خَلْط</button>
+          <button class="alfaaz-close" id="flash-next">التَّالِي ▶</button>
+        </div>
+      </div>
+
+      <div id="game-match" class="game-panel" style="display:none">
+        <div class="match-header">
+          <div class="match-timer">⏱ <span id="match-time">0.0</span>s</div>
+          <button class="alfaaz-close" id="match-new">🔀 جَوْلَة جَدِيدَة</button>
+        </div>
+        <div class="match-grid" id="match-grid"></div>
+        <div class="match-done" id="match-done" style="display:none">
+          🎉 أَحْسَنْت! <span id="match-final-time"></span>s
+          <div><button class="alfaaz-close" id="match-again">اِلْعَبْ مَرَّة أُخْرَى</button></div>
+        </div>
+      </div>
+
+      <div id="game-quiz" class="game-panel" style="display:none">
+        <div class="quiz-body">
+          <div class="quiz-header">
+            <div class="quiz-progress">السُّؤَال <span id="quiz-idx">1</span> / <span id="quiz-total">10</span></div>
+            <div class="quiz-score">النَّتِيجَة: <span id="quiz-score">0</span></div>
+          </div>
+          <div class="quiz-prompt" id="quiz-prompt"></div>
+          <div class="quiz-options" id="quiz-options"></div>
+        </div>
+        <div class="quiz-final" id="quiz-final" style="display:none"></div>
+      </div>
+    </div>
   </div>
 </section>
 <!-- ==================== END الأَلْفَاظ ==================== -->
@@ -10529,6 +10807,206 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   alfaazTrack.addEventListener('touchstart', e => { alfaazDragging = true; alfaazSeek(e); }, { passive: true });
   window.addEventListener('touchmove', e => { if (alfaazDragging) alfaazSeek(e); }, { passive: true });
   window.addEventListener('touchend', () => { alfaazDragging = false; });
+
+  // ==================== الأَلْفَاظ GAME (Flashcards / Match / Quiz) ====================
+  // The word/meaning pool is read from the glossary DOM itself (#alfaaz-glossary),
+  // not duplicated in JS — so the game always matches whatever is in the glossary.
+  (function () {
+    const gameBtn = document.getElementById('alfaaz-game-btn');
+    function setAlfaazGame(on) {
+      document.body.classList.toggle('alfaaz-game-open', on);
+      gameBtn.innerHTML = on ? '📖 قَائِمَة الْكَلِمَات' : '🎮 لُعْبَة';
+      if (on) initGameData();
+    }
+    gameBtn.addEventListener('click', () => setAlfaazGame(!document.body.classList.contains('alfaaz-game-open')));
+
+    let POOL = [];
+    function initGameData() {
+      if (POOL.length) return;
+      POOL = Array.from(document.querySelectorAll('#alfaaz-glossary .meanings-list li')).map(li => ({
+        word: li.querySelector('.word').textContent.trim(),
+        defn: li.querySelector('.defn').textContent.replace(/^—\s*/, '').trim()
+      })).filter(p => p.word && p.defn);
+      startFlash();
+      startQuiz();
+      startMatch();
+    }
+
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // ---- mode switcher ----
+    const modeBtns = Array.from(document.querySelectorAll('.game-mode-btn'));
+    const panels = {
+      flash: document.getElementById('game-flash'),
+      match: document.getElementById('game-match'),
+      quiz: document.getElementById('game-quiz'),
+    };
+    modeBtns.forEach(btn => btn.addEventListener('click', () => {
+      modeBtns.forEach(b => b.classList.toggle('active', b === btn));
+      Object.entries(panels).forEach(([k, el]) => { el.style.display = (k === btn.dataset.mode ? '' : 'none'); });
+    }));
+
+    // ---- FLASHCARDS ----
+    let flashOrder = [], flashIdx = 0;
+    const flashFront = document.getElementById('flashcard-front');
+    const flashBack = document.getElementById('flashcard-back');
+    const flashInner = document.getElementById('flashcard-inner');
+    const flashIdxEl = document.getElementById('flash-idx');
+    const flashTotalEl = document.getElementById('flash-total');
+    function startFlash() {
+      flashOrder = shuffle(POOL.map((_, i) => i));
+      flashIdx = 0;
+      flashTotalEl.textContent = flashOrder.length;
+      renderFlash();
+    }
+    function renderFlash() {
+      flashInner.classList.remove('flipped');
+      const p = POOL[flashOrder[flashIdx]];
+      flashFront.textContent = p.word;
+      flashBack.textContent = p.defn;
+      flashIdxEl.textContent = flashIdx + 1;
+    }
+    document.getElementById('flashcard').addEventListener('click', () => flashInner.classList.toggle('flipped'));
+    document.getElementById('flash-next').addEventListener('click', () => { flashIdx = (flashIdx + 1) % flashOrder.length; renderFlash(); });
+    document.getElementById('flash-prev').addEventListener('click', () => { flashIdx = (flashIdx - 1 + flashOrder.length) % flashOrder.length; renderFlash(); });
+    document.getElementById('flash-shuffle').addEventListener('click', startFlash);
+
+    // ---- MULTIPLE CHOICE QUIZ ----
+    const QUIZ_LEN = 10;
+    let quizOrder = [], quizIdx = 0, quizScore = 0, quizAnswered = false;
+    const quizPrompt = document.getElementById('quiz-prompt');
+    const quizOptions = document.getElementById('quiz-options');
+    const quizIdxEl = document.getElementById('quiz-idx');
+    const quizTotalEl = document.getElementById('quiz-total');
+    const quizScoreEl = document.getElementById('quiz-score');
+    const quizFinal = document.getElementById('quiz-final');
+    const quizBody = document.querySelector('#game-quiz .quiz-body');
+    function startQuiz() {
+      quizOrder = shuffle(POOL.map((_, i) => i)).slice(0, Math.min(QUIZ_LEN, POOL.length));
+      quizIdx = 0; quizScore = 0;
+      quizTotalEl.textContent = quizOrder.length;
+      quizFinal.style.display = 'none';
+      quizBody.style.display = '';
+      renderQuizQ();
+    }
+    function renderQuizQ() {
+      quizAnswered = false;
+      quizScoreEl.textContent = quizScore;
+      quizIdxEl.textContent = quizIdx + 1;
+      const correct = POOL[quizOrder[quizIdx]];
+      quizPrompt.textContent = correct.word;
+      const others = shuffle(POOL.filter(p => p !== correct)).slice(0, 3);
+      const opts = shuffle([correct, ...others]);
+      quizOptions.innerHTML = '';
+      opts.forEach(o => {
+        const div = document.createElement('div');
+        div.className = 'quiz-option';
+        div.textContent = o.defn;
+        div.addEventListener('click', () => {
+          if (quizAnswered) return;
+          quizAnswered = true;
+          const isCorrect = o === correct;
+          div.classList.add(isCorrect ? 'correct' : 'wrong');
+          if (isCorrect) quizScore++;
+          Array.from(quizOptions.children).forEach(c => {
+            if (c !== div) {
+              c.classList.add('disabled');
+              if (c.textContent === correct.defn) c.classList.add('correct');
+            }
+          });
+          quizScoreEl.textContent = quizScore;
+          setTimeout(() => {
+            quizIdx++;
+            if (quizIdx < quizOrder.length) renderQuizQ(); else finishQuiz();
+          }, 1100);
+        });
+        quizOptions.appendChild(div);
+      });
+    }
+    function finishQuiz() {
+      quizBody.style.display = 'none';
+      quizFinal.style.display = '';
+      quizFinal.innerHTML = '🎉 النَّتِيجَة النِّهَائِيَّة: ' + quizScore + ' / ' + quizOrder.length +
+        '<br><button class="alfaaz-close" id="quiz-again">اِلْعَبْ مَرَّة أُخْرَى</button>';
+      document.getElementById('quiz-again').addEventListener('click', startQuiz);
+    }
+
+    // ---- MATCH ----
+    const MATCH_SIZE = 6;
+    const matchGrid = document.getElementById('match-grid');
+    const matchDone = document.getElementById('match-done');
+    const matchTimeEl = document.getElementById('match-time');
+    const matchFinalTimeEl = document.getElementById('match-final-time');
+    let matchTimer = null, matchStart = 0, matchSelected = [], matchMatchedCount = 0, matchPairCount = 0;
+    function startMatch() {
+      clearInterval(matchTimer);
+      matchDone.style.display = 'none';
+      matchGrid.style.display = '';
+      matchSelected = [];
+      matchMatchedCount = 0;
+      const pairs = shuffle(POOL).slice(0, Math.min(MATCH_SIZE, POOL.length));
+      matchPairCount = pairs.length;
+      const cards = [];
+      pairs.forEach((p, i) => {
+        cards.push({ id: i, type: 'word', text: p.word });
+        cards.push({ id: i, type: 'defn', text: p.defn });
+      });
+      const shuffled = shuffle(cards);
+      matchGrid.innerHTML = '';
+      shuffled.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'match-card ' + c.type;
+        div.textContent = c.text;
+        div.dataset.id = c.id;
+        div.dataset.type = c.type;
+        div.addEventListener('click', () => onMatchClick(div));
+        matchGrid.appendChild(div);
+      });
+      matchStart = Date.now();
+      matchTimer = setInterval(() => {
+        matchTimeEl.textContent = ((Date.now() - matchStart) / 1000).toFixed(1);
+      }, 100);
+    }
+    function onMatchClick(div) {
+      if (div.classList.contains('matched') || div.classList.contains('selected')) return;
+      if (matchSelected.length === 2) return;
+      div.classList.add('selected');
+      matchSelected.push(div);
+      if (matchSelected.length === 2) {
+        const [a, b] = matchSelected;
+        if (a.dataset.id === b.dataset.id && a.dataset.type !== b.dataset.type) {
+          a.classList.add('correct'); b.classList.add('correct');
+          setTimeout(() => {
+            a.classList.add('matched'); b.classList.add('matched');
+            matchSelected = [];
+            matchMatchedCount++;
+            if (matchMatchedCount === matchPairCount) finishMatch();
+          }, 350);
+        } else {
+          a.classList.add('wrong'); b.classList.add('wrong');
+          setTimeout(() => {
+            a.classList.remove('selected', 'wrong'); b.classList.remove('selected', 'wrong');
+            matchSelected = [];
+          }, 600);
+        }
+      }
+    }
+    function finishMatch() {
+      clearInterval(matchTimer);
+      matchFinalTimeEl.textContent = matchTimeEl.textContent;
+      matchGrid.style.display = 'none';
+      matchDone.style.display = '';
+    }
+    document.getElementById('match-new').addEventListener('click', startMatch);
+    document.getElementById('match-again').addEventListener('click', startMatch);
+  })();
 </script>
 </body>
 </html>
