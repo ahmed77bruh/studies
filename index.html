@@ -12050,6 +12050,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     modeBtns.forEach(btn => btn.addEventListener('click', () => {
       modeBtns.forEach(b => b.classList.toggle('active', b === btn));
       Object.entries(panels).forEach(([k, el]) => { el.style.display = (k === btn.dataset.mode ? '' : 'none'); });
+      if (btn.dataset.mode === 'match') startMatch();
     }));
 
     // ---- FLASHCARDS ----
