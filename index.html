@@ -975,20 +975,6 @@
     .match-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
   }
 
-  /* ==================== الفتن Q&A — reveal-on-wrong quiz over Kitab al-Fitan hadith content ==================== */
-  #fitanqa-view { display: none; }
-  body.fitanqa-open #main-content,
-  body.fitanqa-open .nav-bar,
-  body.fitanqa-open .progress-track,
-  body.fitanqa-open .mode-toggle,
-  body.fitanqa-open > footer { display: none !important; }
-  body.fitanqa-open #fitanqa-view { display: block; }
-  .fitanqa-inner { max-width: 620px; margin: 0 auto; padding: 26px 20px 60px; }
-  /* .quiz-prompt here shows a full hadith matn (not a single word), so give it room to breathe and read RTL properly */
-  #fitanqa-view .quiz-prompt { font-size: 1.15rem; line-height: 2; font-weight: normal; text-align: right; }
-  #fitanqa-view .quiz-option { direction: rtl; text-align: right; font-family: 'Amiri', 'Traditional Arabic', serif; font-size: 1rem; }
-  .fitanqa-src { text-align: center; font-size: 0.78rem; color: var(--text-takhrij); margin: -8px 0 16px; direction: ltr; }
-
   /* ==================== WELCOME / HOW-TO-USE — opens first, before any hadith ==================== */
   #welcome-view { display: none; }
   body.welcome-open #main-content,
@@ -1079,9 +1065,6 @@
     <button id="alfaaz-btn" class="alfaaz-btn" title="الألفاظ — glossary of difficult words (Fitan &amp; Qiyamah)">
       <span class="a-ico">📖</span><span class="a-label">الْأَلْفَاظ</span>
     </button>
-    <button id="fitanqa-btn" class="alfaaz-btn" title="أسئلة الفتن — who narrated it? a quiz over Kitab al-Fitan hadith">
-      <span class="a-ico">❓</span><span class="a-label">أَسْئِلَةُ الْفِتَنِ</span>
-    </button>
     <button id="welcome-btn" class="theme-toggle" title="How to use this guide" aria-label="How to use this guide">ℹ️</button>
   </div>
 </header>
@@ -1126,13 +1109,6 @@
         <div class="wf-text">
           <div class="wf-title"><span class="ar">الْأَلْفَاظ</span> — Glossary</div>
           <div class="wf-desc">Every difficult word from Mirqāt in one place. Includes a Flashcards / Match / Quiz game to test yourself.</div>
-        </div>
-      </div>
-      <div class="welcome-feature">
-        <div class="wf-ico">❓</div>
-        <div class="wf-text">
-          <div class="wf-title"><span class="ar">أَسْئِلَةُ الْفِتَنِ</span> — Who Narrated It?</div>
-          <div class="wf-desc">A quiz over Kitāb al-Fitan: read the matn, pick the Ṣaḥābī. Wrong picks turn red, the right one turns green.</div>
         </div>
       </div>
       <div class="welcome-feature">
@@ -17776,26 +17752,6 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
 </section>
 <!-- ==================== END الأَلْفَاظ ==================== -->
 
-<!-- ==================== الفتن Q&A — GAME VIEW ==================== -->
-<section id="fitanqa-view">
-  <div class="fitanqa-inner">
-    <button class="alfaaz-close" id="fitanqa-close">&rarr; Back</button>
-    <div class="alfaaz-title">أَسْئِلَةُ الْفِتَنِ</div>
-    <div class="alfaaz-sub">Who narrated this? Read the matn, pick the Ṣaḥābī — built live from every Kitāb al-Fitan hadith on this page, so it grows as more are added. Answer reveals in place; wrong picks turn red, the correct one turns green.</div>
-    <div class="quiz-body" id="fitanqa-body">
-      <div class="quiz-header">
-        <div class="quiz-progress">Question <span id="fitanqa-idx">1</span> / <span id="fitanqa-total">0</span></div>
-        <div class="quiz-score">Score: <span id="fitanqa-score">0</span></div>
-      </div>
-      <div class="quiz-prompt" id="fitanqa-prompt"></div>
-      <div class="fitanqa-src">Ḥadīth <span id="fitanqa-num"></span></div>
-      <div class="quiz-options" id="fitanqa-options"></div>
-    </div>
-    <div class="quiz-final" id="fitanqa-final" style="display:none"></div>
-  </div>
-</section>
-<!-- ==================== END الفتن Q&A ==================== -->
-
 <footer>مشكاة المصابيح — Study Notes &nbsp;|&nbsp; For personal academic use</footer>
 
 <script>
@@ -17925,7 +17881,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const alfaazBtn = document.getElementById('alfaaz-btn');
   const alfaazClose = document.getElementById('alfaaz-close');
   function setAlfaaz(on) {
-    if (on) { document.body.classList.remove('toc-open'); document.body.classList.remove('fitanqa-open'); document.body.classList.remove('welcome-open'); }
+    if (on) { document.body.classList.remove('toc-open'); document.body.classList.remove('welcome-open'); }
     document.body.classList.toggle('alfaaz-open', on);
     window.scrollTo(0, 0);
   }
@@ -17939,158 +17895,24 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const tocBtn = document.getElementById('toc-btn');
   const tocClose = document.getElementById('toc-close');
   function setToc(on) {
-    if (on) { setAlfaaz(false); document.body.classList.remove('fitanqa-open'); document.body.classList.remove('welcome-open'); }
+    if (on) { setAlfaaz(false); document.body.classList.remove('welcome-open'); }
     document.body.classList.toggle('toc-open', on);
     window.scrollTo(0, 0);
   }
   tocBtn.addEventListener('click', () => setToc(!document.body.classList.contains('toc-open')));
   tocClose.addEventListener('click', () => setToc(false));
 
-  // الفتن Q&A — separate from the الأَلْفَاظ glossary/game above: this tests
-  // hadith CONTENT (who narrated it), not vocabulary. Pool is built live from
-  // the DOM every time the view opens, by reading every .hadith-entry whose
-  // .kitab-text is كِتَابُ الْفِتَنِ and pulling its matn + narrator out of the
-  // takhrij line — so it needs no separate data file and can never drift out
-  // of sync as more Fitan hadith get built.
-  const fitanqaBtn = document.getElementById('fitanqa-btn');
-  const fitanqaClose = document.getElementById('fitanqa-close');
-  function setFitanQA(on) {
-    if (on) { setAlfaaz(false); setToc(false); document.body.classList.remove('welcome-open'); }
-    document.body.classList.toggle('fitanqa-open', on);
-    window.scrollTo(0, 0);
-    if (on) startFitanQA();
-  }
-  fitanqaBtn.addEventListener('click', () => setFitanQA(!document.body.classList.contains('fitanqa-open')));
-  fitanqaClose.addEventListener('click', () => setFitanQA(false));
-
   // WELCOME / how-to-use — open by default (body starts with the class already
   // in the markup, so it's the first thing shown, no flash of hadith content).
   const welcomeBtn = document.getElementById('welcome-btn');
   const welcomeStart = document.getElementById('welcome-start');
   function setWelcome(on) {
-    if (on) { setAlfaaz(false); setToc(false); document.body.classList.remove('fitanqa-open'); }
+    if (on) { setAlfaaz(false); setToc(false); }
     document.body.classList.toggle('welcome-open', on);
     window.scrollTo(0, 0);
   }
   welcomeBtn.addEventListener('click', () => setWelcome(!document.body.classList.contains('welcome-open')));
   welcomeStart.addEventListener('click', () => setWelcome(false));
-
-  // local shuffle — the alfaaz-game's own shuffle() is private to its IIFE,
-  // not reachable from here, so this is a small self-contained copy.
-  function fitanqaShuffle(arr) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
-  function truncateMatn(s, max) {
-    s = s.replace(/\s+/g, ' ').trim();
-    if (s.length <= max) return s;
-    const cut = s.slice(0, max);
-    const lastSpace = cut.lastIndexOf(' ');
-    return (lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut) + '…';
-  }
-
-  function buildFitanPool() {
-    return Array.from(document.querySelectorAll('.hadith-entry')).filter(e => {
-      const kt = e.querySelector('.kitab-text');
-      return kt && kt.textContent.trim() === 'كِتَابُ الْفِتَنِ';
-    }).map(e => {
-      const matnEl = e.querySelector('.matn-text');
-      const takhrijEl = e.querySelector('.takhrij');
-      if (!matnEl || !takhrijEl) return null;
-      const takhrij = takhrijEl.textContent.trim();
-      const firstPart = takhrij.split('·')[0].trim();
-      const narrator = firstPart.replace(/^Narrated by\s*/i, '').trim();
-      if (!narrator) return null;
-      return {
-        num: e.dataset.num,
-        matn: truncateMatn(matnEl.textContent, 240),
-        narrator: narrator,
-      };
-    }).filter(Boolean);
-  }
-
-  const FITANQA_LEN = 50;
-  let fitanqaPool = [], fitanqaOrder = [], fitanqaIdx = 0, fitanqaScore = 0, fitanqaAnswered = false;
-  const fitanqaBody = document.getElementById('fitanqa-body');
-  const fitanqaFinal = document.getElementById('fitanqa-final');
-  const fitanqaPrompt = document.getElementById('fitanqa-prompt');
-  const fitanqaOptions = document.getElementById('fitanqa-options');
-  const fitanqaNumEl = document.getElementById('fitanqa-num');
-  const fitanqaIdxEl = document.getElementById('fitanqa-idx');
-  const fitanqaTotalEl = document.getElementById('fitanqa-total');
-  const fitanqaScoreEl = document.getElementById('fitanqa-score');
-
-  function startFitanQA() {
-    fitanqaPool = buildFitanPool();
-    const n = Math.min(FITANQA_LEN, fitanqaPool.length);
-    fitanqaOrder = fitanqaShuffle(fitanqaPool.map((_, i) => i)).slice(0, n);
-    fitanqaIdx = 0; fitanqaScore = 0;
-    fitanqaTotalEl.textContent = fitanqaOrder.length;
-    fitanqaFinal.style.display = 'none';
-    fitanqaBody.style.display = '';
-    if (!fitanqaOrder.length) {
-      fitanqaPrompt.textContent = 'No Kitāb al-Fitan hadith are built yet — check back once some are added.';
-      fitanqaOptions.innerHTML = '';
-      fitanqaNumEl.textContent = '';
-      return;
-    }
-    renderFitanQ();
-  }
-
-  function uniqueNarrators(pool) {
-    const seen = new Set(), out = [];
-    pool.forEach(p => { if (!seen.has(p.narrator)) { seen.add(p.narrator); out.push(p); } });
-    return out;
-  }
-
-  function renderFitanQ() {
-    fitanqaAnswered = false;
-    fitanqaScoreEl.textContent = fitanqaScore;
-    fitanqaIdxEl.textContent = fitanqaIdx + 1;
-    const correct = fitanqaPool[fitanqaOrder[fitanqaIdx]];
-    fitanqaPrompt.textContent = correct.matn;
-    fitanqaNumEl.textContent = correct.num;
-    const others = fitanqaShuffle(uniqueNarrators(fitanqaPool).filter(p => p.narrator !== correct.narrator)).slice(0, 3);
-    const opts = fitanqaShuffle([correct.narrator, ...others.map(o => o.narrator)]);
-    fitanqaOptions.innerHTML = '';
-    opts.forEach(optText => {
-      const div = document.createElement('div');
-      div.className = 'quiz-option';
-      div.textContent = optText;
-      div.addEventListener('click', () => {
-        if (fitanqaAnswered) return;
-        fitanqaAnswered = true;
-        const isCorrect = optText === correct.narrator;
-        div.classList.add(isCorrect ? 'correct' : 'wrong');
-        if (isCorrect) fitanqaScore++;
-        Array.from(fitanqaOptions.children).forEach(c => {
-          if (c !== div) {
-            c.classList.add('disabled');
-            if (c.textContent === correct.narrator) c.classList.add('correct');
-          }
-        });
-        fitanqaScoreEl.textContent = fitanqaScore;
-        setTimeout(() => {
-          fitanqaIdx++;
-          if (fitanqaIdx < fitanqaOrder.length) renderFitanQ(); else finishFitanQA();
-        }, 1300);
-      });
-      fitanqaOptions.appendChild(div);
-    });
-  }
-
-  function finishFitanQA() {
-    fitanqaBody.style.display = 'none';
-    fitanqaFinal.style.display = '';
-    fitanqaFinal.innerHTML = '\uD83C\uDF89 Final Score: ' + fitanqaScore + ' / ' + fitanqaOrder.length +
-      '<br><button class="alfaaz-close" id="fitanqa-again">Play Again</button>';
-    document.getElementById('fitanqa-again').addEventListener('click', startFitanQA);
-  }
 
   function tocGoto(num) {
     setToc(false);
