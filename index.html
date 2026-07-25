@@ -988,9 +988,71 @@
   #fitanqa-view .quiz-prompt { font-size: 1.15rem; line-height: 2; font-weight: normal; text-align: right; }
   #fitanqa-view .quiz-option { direction: rtl; text-align: right; font-family: 'Amiri', 'Traditional Arabic', serif; font-size: 1rem; }
   .fitanqa-src { text-align: center; font-size: 0.78rem; color: var(--text-takhrij); margin: -8px 0 16px; direction: ltr; }
+
+  /* ==================== WELCOME / HOW-TO-USE — opens first, before any hadith ==================== */
+  #welcome-view { display: none; }
+  body.welcome-open #main-content,
+  body.welcome-open .nav-bar,
+  body.welcome-open .progress-track,
+  body.welcome-open .mode-toggle,
+  body.welcome-open > footer { display: none !important; }
+  body.welcome-open #welcome-view { display: block; }
+  .welcome-lead {
+    text-align: center;
+    font-size: 0.98rem;
+    color: var(--text-main);
+    line-height: 1.7;
+    max-width: 46ch;
+    margin: 0 auto 28px;
+  }
+  .welcome-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .welcome-feature {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 16px;
+  }
+  .welcome-feature .wf-ico {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    width: 30px;
+    text-align: center;
+  }
+  .welcome-feature .wf-text { direction: ltr; text-align: left; }
+  .welcome-feature .wf-title {
+    font-weight: bold;
+    color: var(--accent-text);
+    font-size: 0.96rem;
+    margin-bottom: 2px;
+  }
+  .welcome-feature .wf-title .ar { direction: rtl; unicode-bidi: embed; }
+  .welcome-feature .wf-desc { font-size: 0.86rem; color: var(--text-defn); line-height: 1.5; }
+  .welcome-start-wrap { text-align: center; }
+  .welcome-start-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--gold-btn-text);
+    border: none;
+    border-radius: 24px;
+    padding: 13px 34px;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: opacity 0.2s, background-color 0.5s ease, color 0.5s ease;
+  }
+  .welcome-start-btn:hover { opacity: 0.85; }
 </style>
 </head>
-<body>
+<body class="welcome-open">
 
 <div class="mode-toggle" title="Toggle slide view (each hadith broken into scrollable sections you page through one by one)">
   <span>Slide View</span>
@@ -1019,6 +1081,7 @@
     <button id="fitanqa-btn" class="alfaaz-btn" title="أسئلة الفتن — who narrated it? a quiz over Kitab al-Fitan hadith">
       <span class="a-ico">❓</span><span class="a-label">أَسْئِلَةُ الْفِتَنِ</span>
     </button>
+    <button id="welcome-btn" class="theme-toggle" title="How to use this guide" aria-label="How to use this guide">ℹ️</button>
   </div>
 </header>
 
@@ -1035,6 +1098,64 @@
   </div>
   <button id="btn-prev" onclick="navigate(-1)" disabled style="direction:ltr">&#8592; السابق</button>
 </div>
+
+<!-- ==================== WELCOME / HOW TO USE ==================== -->
+<section id="welcome-view">
+  <div class="alfaaz-inner">
+    <div class="alfaaz-title" style="margin-top:6px">مشكاة المصابيح</div>
+    <p class="welcome-lead">A hadith-by-hadith study guide for Mishkat 2. Matn, translation, class notes, Mirqāt word-meanings, and cross-references for every hadith — plus a few tools to help you navigate and review.</p>
+
+    <div class="welcome-features">
+      <div class="welcome-feature">
+        <div class="wf-ico">◀ ▶</div>
+        <div class="wf-text">
+          <div class="wf-title">Reading, one hadith at a time</div>
+          <div class="wf-desc">Use السابق / التالي (Previous / Next) to move through hadith in order, or drag the gold bar under the header to jump anywhere instantly.</div>
+        </div>
+      </div>
+      <div class="welcome-feature">
+        <div class="wf-ico">📑</div>
+        <div class="wf-text">
+          <div class="wf-title"><span class="ar">الْفِهْرِس</span> — Table of Contents</div>
+          <div class="wf-desc">Every hadith, grouped by kitāb and bāb. Tap any one to jump straight to it.</div>
+        </div>
+      </div>
+      <div class="welcome-feature">
+        <div class="wf-ico">📖</div>
+        <div class="wf-text">
+          <div class="wf-title"><span class="ar">الْأَلْفَاظ</span> — Glossary</div>
+          <div class="wf-desc">Every difficult word from Mirqāt in one place. Includes a Flashcards / Match / Quiz game to test yourself.</div>
+        </div>
+      </div>
+      <div class="welcome-feature">
+        <div class="wf-ico">❓</div>
+        <div class="wf-text">
+          <div class="wf-title"><span class="ar">أَسْئِلَةُ الْفِتَنِ</span> — Who Narrated It?</div>
+          <div class="wf-desc">A quiz over Kitāb al-Fitan: read the matn, pick the Ṣaḥābī. Wrong picks turn red, the right one turns green.</div>
+        </div>
+      </div>
+      <div class="welcome-feature">
+        <div class="wf-ico">☀️🌙</div>
+        <div class="wf-text">
+          <div class="wf-title">Dark mode</div>
+          <div class="wf-desc">Top-left toggle. Your choice is remembered next time.</div>
+        </div>
+      </div>
+      <div class="welcome-feature">
+        <div class="wf-ico">⇅</div>
+        <div class="wf-text">
+          <div class="wf-title">Slide View</div>
+          <div class="wf-desc">Bottom-right switch. Turns every hadith into one long scroll, like flipping through a PDF, instead of paging one at a time.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="welcome-start-wrap">
+      <button class="welcome-start-btn" id="welcome-start" style="direction:ltr">Begin Reading &rarr;</button>
+    </div>
+  </div>
+</section>
+<!-- ==================== END WELCOME ==================== -->
 
 <main id="main-content">
 
@@ -17803,7 +17924,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const alfaazBtn = document.getElementById('alfaaz-btn');
   const alfaazClose = document.getElementById('alfaaz-close');
   function setAlfaaz(on) {
-    if (on) { document.body.classList.remove('toc-open'); document.body.classList.remove('fitanqa-open'); }
+    if (on) { document.body.classList.remove('toc-open'); document.body.classList.remove('fitanqa-open'); document.body.classList.remove('welcome-open'); }
     document.body.classList.toggle('alfaaz-open', on);
     window.scrollTo(0, 0);
   }
@@ -17817,7 +17938,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const tocBtn = document.getElementById('toc-btn');
   const tocClose = document.getElementById('toc-close');
   function setToc(on) {
-    if (on) { setAlfaaz(false); document.body.classList.remove('fitanqa-open'); }
+    if (on) { setAlfaaz(false); document.body.classList.remove('fitanqa-open'); document.body.classList.remove('welcome-open'); }
     document.body.classList.toggle('toc-open', on);
     window.scrollTo(0, 0);
   }
@@ -17833,13 +17954,25 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const fitanqaBtn = document.getElementById('fitanqa-btn');
   const fitanqaClose = document.getElementById('fitanqa-close');
   function setFitanQA(on) {
-    if (on) { setAlfaaz(false); setToc(false); }
+    if (on) { setAlfaaz(false); setToc(false); document.body.classList.remove('welcome-open'); }
     document.body.classList.toggle('fitanqa-open', on);
     window.scrollTo(0, 0);
     if (on) startFitanQA();
   }
   fitanqaBtn.addEventListener('click', () => setFitanQA(!document.body.classList.contains('fitanqa-open')));
   fitanqaClose.addEventListener('click', () => setFitanQA(false));
+
+  // WELCOME / how-to-use — open by default (body starts with the class already
+  // in the markup, so it's the first thing shown, no flash of hadith content).
+  const welcomeBtn = document.getElementById('welcome-btn');
+  const welcomeStart = document.getElementById('welcome-start');
+  function setWelcome(on) {
+    if (on) { setAlfaaz(false); setToc(false); document.body.classList.remove('fitanqa-open'); }
+    document.body.classList.toggle('welcome-open', on);
+    window.scrollTo(0, 0);
+  }
+  welcomeBtn.addEventListener('click', () => setWelcome(!document.body.classList.contains('welcome-open')));
+  welcomeStart.addEventListener('click', () => setWelcome(false));
 
   // local shuffle — the alfaaz-game's own shuffle() is private to its IIFE,
   // not reachable from here, so this is a small self-contained copy.
