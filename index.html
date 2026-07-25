@@ -376,6 +376,50 @@
     unicode-bidi: embed;
   }
 
+  /* COMMENTARY NOTES (external shuruh, e.g. Mirqat translation, layered onto an existing entry) */
+  .commentary-block {
+    background: var(--meanings-bg);
+    border-top: 1px dashed var(--gold-border-soft);
+    padding: 12px 22px 14px;
+  }
+
+  .commentary-header {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-text);
+    margin-bottom: 8px;
+    direction: ltr;
+    text-align: left;
+    font-family: Georgia, serif;
+  }
+
+  .commentary-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .commentary-list li {
+    font-size: 0.97rem;
+    line-height: 1.55;
+    padding: 5px 0 5px 0;
+    border-bottom: 1px dotted var(--notes-divider);
+    direction: ltr;
+    text-align: left;
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+  }
+
+  .commentary-list li:last-child { border: none; }
+
+  .commentary-list li::before {
+    content: '\203B';
+    color: var(--accent-text);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
   /* WORD MEANINGS */
   .meanings-block {
     background: var(--meanings-bg);
@@ -4066,6 +4110,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Al-Māwardī: the حِكْمَة of initiating السَّلَام is either removing fear between two people meeting, humility fitting a believer's state, or honoring the other — since السَّلَام itself aims only at gaining affection or warding off harm.</li>
+        <li>Mullā ʿAlī al-Qārī (قُلْت): the reward of initiating the سَلَام is greater than the responder's obligation, even though initiating is سُنَّة and responding is فَرْض — a point he says calls for further reflection (فَلْيُتَأَمَّل).</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4110,6 +4162,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       <ul class="notes-list">
         <li>This shows the جَوَاز of elders initiating السَّلَام to children.</li>
         <li>It is also to teach the children the importance of السَّلَام — training them in its آدَاب from a young age.</li>
+      </ul>
+    </div>
+
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Nawawī: if one gives سَلَام to a mixed group of men and children and only a child responds, the obligation of رَدّ is discharged for the whole group — the same principle by which one person's صَلَاةُ الْجَنَازَة discharges the group's obligation.</li>
+        <li>Abū Saʿīd al-Mutawallī on greeting the opposite gender: a wife, slave-girl, or maḥram is treated like a man; a non-maḥram woman feared to cause فِتْنَة should not be greeted first (and if greeted, may not reply); an elderly woman not feared to cause فِتْنَة may exchange سَلَام freely.</li>
       </ul>
     </div>
 
@@ -4169,6 +4229,15 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>The two Qur'anic proofs Mirqat cites behind the prohibition on initiating السَّلَام to Jews and Christians: «لَا تَجِدُ قَوْمًا يُؤْمِنُونَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ يُوَادُّونَ مَنْ حَادَّ اللَّهَ وَرَسُولَهُ» (al-Mujādalah 58:22) and «وَهُمْ صَاغِرُونَ» (al-Tawbah 9:29).</li>
+        <li>Al-Awzāʿī's maxim, cited alongside Nawawī's own preference for refraining: "If you give the سَلَام, the righteous before you have given it; and if you refrain, the righteous before you have refrained."</li>
+        <li>If one gives سَلَام to someone unrecognized and later learns he is a ذِمِّيّ, it is recommended to retract by saying «أَسْتَرِدُّ سَلَامِي» (I take back my greeting) — Mullā ʿAlī al-Qārī extends the same to a rebellious innovator or an arrogant person.</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4216,6 +4285,13 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Al-Ṭībī: «الْيَهُود» is grouped with «الْمُشْرِكِين» in this narration either for their belief that ʿUzayr is the son of Allah, or by way of تَغْلِيب (the dominant category absorbing the lesser) — Mullā ʿAlī al-Qārī prefers reading «وَالْيَهُود» as its own separate, coordinated category instead.</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4259,6 +4335,13 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       <ul class="notes-list">
         <li>The Sahaba's reply مَا لَنَا مِنْ مَجَالِسِنَا بُدٌّ نَتَحَدَّثُ فِيهَا means: ضَرُورَة has forced us to sit and speak here, because we have no other space in which to talk.</li>
         <li>So the Prophet ﷺ did not forbid it absolutely, but commanded giving the road its حَقّ — among which is رَدُّ السَّلَام (which is why this hadith sits in بَابُ السَّلَامِ).</li>
+      </ul>
+    </div>
+
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Ibn al-Malak's grammatical distinction: «الْمَجْلَس» (فَتْحَة on the لَام) is a مَصْدَر مِيمِيّ meaning the act of sitting itself — the correct reading here; «الْمَجْلِس» (كَسْرَة) would instead mean the physical place, which does not fit the sentence.</li>
       </ul>
     </div>
 
@@ -4313,6 +4396,13 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Mirqat's own reasoning for why nothing is added past وَبَرَكَاتُهُ: the word بَرَكَات is itself an expression of permanence and completeness, so by nature nothing further is appended to it, whether in the greeting or the reply.</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4361,6 +4451,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Mullā ʿAلِيّ al-Qārī traces the السَّلَام-by-gesture-only حَدِيث's weakness to two specific narrators — عَنْبَسَة بْن عَبْد الرَّحْمَن (severely weak) and مُحَمَّد بْن زَاذَان (مُنْكَر الْحَدِيث) — the same two narrators he identifies as weakening the pen-on-ear حَدِيث (4657) and the سَلَام-before-speech حَدِيث (4652).</li>
+        <li>Al-Qārī relates witnessing a Sufi ascetic in الْمَسْجِد الْحَرَام who took a vow of silence for over forty years and would return greetings only with a gesture of the head — noting this may be what Rasulullah ﷺ foresaw by كَشْف when warning against relying on الْإِشَارَة alone.</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4406,6 +4504,13 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>If one enters an empty house, it is recommended to say «السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِين» (peace be upon us and the righteous servants of Allah) — drawn from the apparent meaning of An-Nūr 24:61.</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4448,6 +4553,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       <ul class="notes-list">
         <li>Mullā ʿAlī al-Qārī: this is because السَّلَام is a تَحِيَّة — something one begins with. So if it occurs after كَلَام (speech), it is no longer functioning as a تَحِيَّة, and its purpose is lost.</li>
         <li>Mirqat's analogy: it is like تَحِيَّةُ الْمَسْجِد, which comes before sitting — if you sit first, its point is gone (يَفُوتُ).</li>
+      </ul>
+    </div>
+
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Corroborating narrations Mirqat lists for «السَّلَامُ قَبْلَ الْكَلَام»: Abū Yaʿlā's Musnad adds «وَلَا تَدْعُوا أَحَدًا إِلَى الطَّعَامِ حَتَّى يُسَلِّم» (do not invite anyone to food until he greets); Ibn al-Najjār from ʿUmar (R.A.): «السَّلَامُ قَبْلَ السُّؤَال» (the greeting comes before any request); al-Ṭabarānī and Abū Nuʿaym from Ibn ʿUmar (R.A.): whoever begins with speech before the سَلَام should not be answered.</li>
+        <li>The same two weak narrators found in 4648's chain (عَنْبَسَة بْن عَبْد الرَّحْمَن, مُحَمَّد بْن زَاذَان) are identified by al-Tūrbishtī as the weakness in this حَدِيث's إِسْنَاد too.</li>
       </ul>
     </div>
 
@@ -4497,6 +4610,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Al-ʿAlāʾ al-Ḥaḍramī (R.A.) governed الْبَحْرَيْن for Rasulullah ﷺ and was confirmed in the post by Abū Bakr and ʿUmar (R.A.), remaining until his death in 14 AH.</li>
+        <li>A parallel Mirqat cites: Rasulullah's ﷺ letter of condolence to Muʿādh ibn Jabal (R.A.) likewise opens with himself before the سَلَام — «مِنْ مُحَمَّدٍ رَسُولِ اللَّهِ إِلَى مُعَاذِ بْنِ جَبَلٍ: سَلَامٌ عَلَيْكَ». Al-Muẓhir traces the practice further back to Sulaymān (A.S.)'s letter in the Qur'an — «إِنَّهُ مِنْ سُلَيْمَانَ وَإِنَّهُ بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ» (an-Naml 27:30) — where his name likewise opens the letter.</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4540,6 +4661,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
         <li>لِلْمَآلِ is how it is written in the نُسَخ of the Maṣābīḥ and the Mishkāt; but in Tirmidhī (and al-Jāmiʿ al-Ṣaghīr) the wording is لِلْمُمْلِي instead.</li>
         <li>Mullā ʿAlī al-Qārī: لِلْمُمْلِي is probably the correct (الصَّحِيح) wording, and لِلْمَآلِ is a تَصْحِيف (scribal corruption) of it — supported by the riwayah أَذْكَرُ لَكَ (Ibn ʿAsākir from Anas).</li>
         <li>The حِكْمَة behind لِلْمُمْلِي: placing the pen on the ear is closer to remembering its place (أَقْرَبُ تَذَكُّرًا لِمَوْضِعِهِ) and easier and faster to grab (أَيْسَرُ مَحَلًّا لِتَنَاوُلِهِ) — unlike putting it elsewhere, where retrieving it quickly may be difficult.</li>
+      </ul>
+    </div>
+
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>The حِكْمَة behind placing the pen specifically at the ear, per a commentator Mirqat quotes: the pen and the tongue are the two "tongues" of the heart — the fleshly tongue never leaves its place at the ear's pathway, so it never stops conveying speech from the heart, while the pen sits apart and must be drawn near the ear to receive what the heart wishes to express before writing it.</li>
+        <li>A textual note: the Maṣābīḥ manuscripts read «أُذُنَيْكَ» (your two ears, dual) rather than the singular «أُذُنِكَ» — al-Tūrbishtī and Mīrak call this a copying error, though Mullā ʿAlī al-Qārī notes the dual can still carry a valid meaning even if it is not the original wording.</li>
       </ul>
     </div>
 
@@ -4592,6 +4721,13 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Mullā ʿAlī al-Qārī's own view, beyond the three positions already cited: the departure سَلَام may in fact be the more fitting of the two, not the less — omitting the arrival سَلَام can be overlooked, but leaving in silence unsettles those who remain, and "safety in one's absence" (which the departure سَلَام signals) is arguably a greater concern than "safety in one's presence," especially if the gathering discussed something private.</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4634,6 +4770,13 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       <div class="notes-header">Class Notes</div>
       <ul class="notes-list">
         <li>The Prophet's (S.A.W.) offer to buy, take, or exchange the date-palm (عَذْق) was not a binding legal ruling (حُكْم شَرْعِيّ) — it was only a request made by way of intercession (شَفَاعَة), not a command (أَمْر).</li>
+      </ul>
+    </div>
+
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Al-Ṭībī draws a grammatical parallel to «إِنْ كَانَ مَقَامِي كَبُرَ عَلَيْكُمْ» (Yūnus 10:71) — «مَقَام» and «مَكَان» (place) are used interchangeably in Arabic, as in the idiom «فَعَلْتُ كَذَا لِمَكَانِ فُلَان» (I did such-and-such for so-and-so's sake).</li>
       </ul>
     </div>
 
@@ -4686,6 +4829,13 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>ʿUmar's (R.A.) silence being treated as an implicit command to leave draws on An-Nūr 24:28: «وَإِنْ قِيلَ لَكُمُ ارْجِعُوا فَارْجِعُوا هُوَ أَزْكَى لَكُمْ» (and if you are told "go back," then go back — it is purer for you).</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4730,6 +4880,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       <ul class="notes-list">
         <li>I.e. when you see that my curtain (حِجَاب) is lifted, you automatically have permission to enter.</li>
         <li>This permission was only for Ibn Masʿūd (R.A.). Just because Ibn Masʿūd (R.A.) had this privilege with Rasulullah (S.A.W.) does not mean that we have this privilege with anyone we wish.</li>
+      </ul>
+    </div>
+
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Ibn Masʿūd (R.A.) held this standing due to his extensive service to Rasulullah ﷺ — he was known as the keeper of his ﷺ sandals, سِوَاك, water-vessel for purification, and prayer-mat.</li>
+        <li>Nawawī draws a broader usul point from this حَدِيث: it is proof that إِذْن (permission to enter) may validly be granted through a sign, not only through speech — though the privilege itself remained unique to Ibn Masʿūd (R.A.).</li>
       </ul>
     </div>
 
@@ -4781,6 +4939,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       </ul>
     </div>
 
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>A supporting precedent Mirqat cites: Umm Hāniʾ (R.A.) sought permission by name rather than the bare «أَنَا» — asked «مَنْ هَذَا؟», she replied «أَنَا أُمُّ هَانِئ» (I am Umm Hāniʾ) and was not rebuked, showing the objection is to the bare, unidentifying «أَنَا», not to self-naming with «أَنَا» attached.</li>
+        <li>Mullā ʿAlī al-Qārī's own qualification: the rebuke would not apply to someone recognized by voice alone, such as a household member — since the purpose (identifying the caller) would already be met.</li>
+      </ul>
+    </div>
+
     <div class="meanings-block">
       <div class="meanings-header">Word Meanings — Mirqat</div>
       <ul class="meanings-list">
@@ -4825,6 +4991,13 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       <ul class="notes-list">
         <li>This too shows that the سَلَام should be given first (before seeking permission).</li>
         <li>Giving the سَلَام first applies only when verbal seeking of permission (اِسْتِئْذَان) is possible; if they cannot hear you through the door, then the سَلَام is not necessary.</li>
+      </ul>
+    </div>
+
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Mirqat notes the نَهْي covers both contexts the matn addresses together: permission to enter and permission to share a meal — one who has done neither (begun with السَّلَام) should be granted neither.</li>
       </ul>
     </div>
 
@@ -4919,6 +5092,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
       <div class="notes-header">Class Notes</div>
       <ul class="notes-list">
         <li>This hadith (about kissing — تَقْبِيل) is mentioned in this bab because many hadith books add التَّقْبِيل to the title of the bab (بَابُ الْمُصَافَحَةِ وَالْمُعَانَقَةِ وَالتَّقْبِيل).</li>
+      </ul>
+    </div>
+
+    <div class="commentary-block">
+      <div class="commentary-header">Commentary Notes — Mirqat</div>
+      <ul class="commentary-list">
+        <li>Al-Aqraʿ ibn Ḥābis (R.A.), whom the حَدِيث names, was a chief of Banū Tamīm in both الْجَاهِلِيَّة and Islam, among الْمُؤَلَّفَة قُلُوبُهُم, later placed over an army toward Khurasan and killed in battle at al-Jawzajān.</li>
+        <li>Nawawī: kissing one's own young child on the cheek (and elsewhere, non-desirously) out of tenderness and mercy is وَاجِب; kissing another's child the same way, or a kinsman's out of family love, is سُنَّة.</li>
       </ul>
     </div>
 
