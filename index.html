@@ -17807,6 +17807,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
 
   let missingCount = 0, missingHadithTotal = 0;
 
+  // Hand-counted from the 39 class-note photos (M2/missing_chapters_notes,
+  // Session 70) — how many of the missing hadith actually have real notes
+  // ready to type in, vs. the 248 being just the theoretical range-span of
+  // the empty chapters. Not derivable from the DOM like everything else in
+  // this file, so it's a plain constant — update by hand if that photo set
+  // ever gets re-counted or added to.
+  const READY_TO_TYPE = 131;
+
   function renderMissing() {
     const nums = entries.map(e => parseInt(e.dataset.num, 10));
     const missing = KEPT_CHAPTERS.filter(([kitab, bab, lo, hi]) => !nums.some(n => n >= lo && n <= hi));
@@ -17843,7 +17851,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     const sub = document.getElementById('missing-sub');
     if (sub) sub.textContent = `In-scope for this term (not on the takhfeef drop list) but no hadith have been built into this guide yet — ${missing.length} chapters, ${totalHadith} hadith total.`;
     const totalEl = document.getElementById('missing-total');
-    if (totalEl) totalEl.innerHTML = `Total: <strong>${missing.length} chapters</strong> — <strong>${totalHadith} hadith</strong> missing`;
+    if (totalEl) totalEl.innerHTML = `Total: <strong>${missing.length} chapters</strong> — <strong>${totalHadith} hadith</strong> missing — <strong>${READY_TO_TYPE} need to type in with actual notes</strong>`;
     const welcomeCount = document.getElementById('welcome-missing-count');
     if (welcomeCount) welcomeCount.textContent = `${missing.length} chapters, ${totalHadith} hadith`;
 
