@@ -1144,6 +1144,13 @@
         </div>
       </div>
       <div class="welcome-feature">
+        <div class="wf-ico">⚠️</div>
+        <div class="wf-text">
+          <div class="wf-title">Missing Chapters</div>
+          <div class="wf-desc">Chapters in scope for this term that have no hadith built yet — <span id="welcome-missing-count">…</span>. Listed at the end of <span class="ar">الْفِهْرِس</span> (📑).</div>
+        </div>
+      </div>
+      <div class="welcome-feature">
         <div class="wf-ico">☀️🌙</div>
         <div class="wf-text">
           <div class="wf-title">Dark mode</div>
@@ -14517,23 +14524,11 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   <div class="alfaaz-inner">
     <button class="alfaaz-close" id="missing-close" title="Back to الْفِهْرِس">&#8594; Back</button>
     <h2 class="alfaaz-title">Missing Chapters</h2>
-    <div class="alfaaz-sub">In-scope for this term (not on the takhfeef drop list) but no hadith have been built into this guide yet — 10 chapters, 248 hadith total.</div>
+    <div class="alfaaz-sub" id="missing-sub">In-scope for this term (not on the takhfeef drop list) but no hadith have been built into this guide yet.</div>
 
-    <div class="toc-kitab-header"><span>كِتَابُ الْآدَابِ</span><span class="toc-count">5 chapters</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ الْمِزَاح</span><span class="missing-meta">4883–4891 &nbsp;·&nbsp; 9 hadith</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ الْمُفَاخَرَةِ</span><span class="missing-meta">4892–4909 &nbsp;·&nbsp; 18 hadith</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ الْحُبِّ فِي اللَّهِ وَمِنَ اللَّهِ</span><span class="missing-meta">5002–5025 &nbsp;·&nbsp; 24 hadith</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ مَا يُنْهَى عَنْهُ مِنَ التَّهَاجُرِ وَالتَّقَاطُعِ وَاتِّبَاعِ الْعَوْرَاتِ</span><span class="missing-meta">5026–5051 &nbsp;·&nbsp; 26 hadith</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ الْغَضَبِ وَالْكِبْرِ</span><span class="missing-meta">5103–5121 &nbsp;·&nbsp; 19 hadith</span></div>
+    <div id="missing-list"></div>
 
-    <div class="toc-kitab-header" style="margin-top:20px"><span>كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ</span><span class="toc-count">5 chapters</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ الْحَشْرِ</span><span class="missing-meta">5531–5547 &nbsp;·&nbsp; 17 hadith</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ الْحِسَابِ وَالْقِصَاصِ وَالْمِيزَانِ</span><span class="missing-meta">5548–5564 &nbsp;·&nbsp; 17 hadith</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ الْحَوْضِ وَالشَّفَاعَةِ</span><span class="missing-meta">5565–5610 &nbsp;·&nbsp; 46 hadith</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ صِفَةِ الْجَنَّةِ وَأَهْلِهَا</span><span class="missing-meta">5611–5653 &nbsp;·&nbsp; 43 hadith</span></div>
-    <div class="missing-row"><span class="missing-bab">بَابُ صِفَةِ النَّارِ وَأَهْلِهَا</span><span class="missing-meta">5664–5692 &nbsp;·&nbsp; 29 hadith</span></div>
-
-    <div class="missing-total">Total: <strong>10 chapters</strong> — <strong>248 hadith</strong> missing</div>
+    <div class="missing-total" id="missing-total"></div>
   </div>
 </section>
 <!-- ==================== END MISSING CHAPTERS ==================== -->
@@ -17761,6 +17756,103 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   }
   window.tocGoto = tocGoto;
 
+  // MISSING CHAPTERS — self-updating. A DOM of hadith-entries can prove a chapter
+  // HAS content, but never that it's absent — that needs an outside reference of
+  // what SHOULD exist. This table is that reference: every kitāb/bāb currently in
+  // scope for this term (i.e. NOT on the takhfeef drop list), with its class-number
+  // range, sourced from a direct Shamela (book 8360) fetch and cross-verified
+  // against this project's own built-entry boundaries (see CLAUDE.md Session 66).
+  // Every load, each range is checked against the live .hadith-entry DOM — a
+  // chapter drops off this list automatically the moment even one hadith inside
+  // its range gets built. Only maintain THIS TABLE by hand, and only when the
+  // syllabus scope itself changes (a new takhfeef, or the class moves past 5737).
+  const KEPT_CHAPTERS = [
+    ["كِتَابُ اللِّبَاسِ", "بَابُ التَّرَجُّلِ", 4418, 4487],
+    ["كِتَابُ اللِّبَاسِ", "بَابُ التَّصَاوِيرِ", 4488, 4512],
+    ["كِتَابُ الطِّبِّ وَالرُّقَى", "بَابُ الأَدْوِيَةِ وَالتَّدَاوِي", 4513, 4574],
+    ["كِتَابُ الطِّبِّ وَالرُّقَى", "بَابُ الْفَأْلِ وَالطِّيَرَةِ", 4575, 4590],
+    ["كِتَابُ الرُّؤْيَا", "", 4605, 4626],
+    ["كِتَابُ الْآدَابِ", "بَابُ السَّلَامِ", 4627, 4665],
+    ["كِتَابُ الْآدَابِ", "بَابُ الِاسْتِئْذَانِ", 4666, 4675],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْمُصَافَحَةِ وَالْمُعَانَقَةِ", 4676, 4693],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْقِيَامِ", 4694, 4705],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْجُلُوسِ وَالنَّوْمِ وَالْمَشْيِ", 4706, 4730],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْعُطَاسِ وَالتَّثَاؤُبِ", 4731, 4743],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْأَسَامِي", 4749, 4781],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْبَيَانِ وَالشِّعْرِ", 4782, 4810],
+    ["كِتَابُ الْآدَابِ", "بَابُ حِفْظِ اللِّسَانِ وَالْغِيبَةِ", 4811, 4876],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْمِزَاح", 4883, 4891],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْمُفَاخَرَةِ", 4892, 4909],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْحُبِّ فِي اللَّهِ وَمِنَ اللَّهِ", 5002, 5025],
+    ["كِتَابُ الْآدَابِ", "بَابُ مَا يُنْهَى عَنْهُ مِنَ التَّهَاجُرِ وَالتَّقَاطُعِ وَاتِّبَاعِ الْعَوْرَاتِ", 5026, 5051],
+    ["كِتَابُ الْآدَابِ", "بَابُ الْغَضَبِ وَالْكِبْرِ", 5103, 5121],
+    ["كِتَابُ الْفِتَنِ", "", 5378, 5408],
+    ["كِتَابُ الْفِتَنِ", "بَابُ الْمَلَاحِمِ", 5409, 5435],
+    ["كِتَابُ الْفِتَنِ", "بَابُ أَشْرَاطِ السَّاعَةِ", 5436, 5462],
+    ["كِتَابُ الْفِتَنِ", "بَابُ الْعَلَامَاتِ بَيْنَ يَدَيِ السَّاعَةِ وَذِكْرِ الدَّجَّالِ", 5463, 5492],
+    ["كِتَابُ الْفِتَنِ", "بَابُ قِصَّةِ ابْنِ صَيَّادٍ", 5493, 5503],
+    ["كِتَابُ الْفِتَنِ", "بَابُ نُزُولِ عِيسَى عَلَيْهِ الصَّلَاةُ وَالسَّلَامُ", 5504, 5507],
+    ["كِتَابُ الْفِتَنِ", "بَابُ قُرْبِ السَّاعَةِ وَأَنَّ مَنْ مَاتَ فَقَدْ قَامَتْ قِيَامَتُهُ", 5508, 5514],
+    ["كِتَابُ الْفِتَنِ", "بَابُ لَا تَقُومُ السَّاعَةُ إِلَّا عَلَى شِرَارِ النَّاسِ", 5515, 5519],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ النَّفْخِ فِي الصُّورِ", 5520, 5530],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ الْحَشْرِ", 5531, 5547],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ الْحِسَابِ وَالْقِصَاصِ وَالْمِيزَانِ", 5548, 5564],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ الْحَوْضِ وَالشَّفَاعَةِ", 5565, 5610],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ صِفَةِ الْجَنَّةِ وَأَهْلِهَا", 5611, 5653],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ رُؤْيَةِ اللَّهِ تَعَالَى", 5654, 5663],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ صِفَةِ النَّارِ وَأَهْلِهَا", 5664, 5692],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ خَلْقِ الْجَنَّةِ وَالنَّارِ", 5693, 5696],
+    ["كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ", "بَابُ بَدْءِ الْخَلْقِ وَذِكْرِ الْأَنْبِيَاءِ", 5697, 5737],
+  ];
+
+  let missingCount = 0, missingHadithTotal = 0;
+
+  function renderMissing() {
+    const nums = entries.map(e => parseInt(e.dataset.num, 10));
+    const missing = KEPT_CHAPTERS.filter(([kitab, bab, lo, hi]) => !nums.some(n => n >= lo && n <= hi));
+
+    const byKitab = new Map();
+    let totalHadith = 0;
+    missing.forEach(([kitab, bab, lo, hi]) => {
+      if (!byKitab.has(kitab)) byKitab.set(kitab, []);
+      byKitab.get(kitab).push([bab, lo, hi]);
+      totalHadith += (hi - lo + 1);
+    });
+
+    const list = document.getElementById('missing-list');
+    if (list) {
+      list.innerHTML = '';
+      let first = true;
+      byKitab.forEach((babs, kitab) => {
+        const kHead = document.createElement('div');
+        kHead.className = 'toc-kitab-header';
+        if (!first) kHead.style.marginTop = '20px';
+        first = false;
+        kHead.innerHTML = `<span>${kitab}</span><span class="toc-count">${babs.length} ${babs.length === 1 ? 'chapter' : 'chapters'}</span>`;
+        list.appendChild(kHead);
+        babs.forEach(([bab, lo, hi]) => {
+          const row = document.createElement('div');
+          row.className = 'missing-row';
+          row.innerHTML = `<span class="missing-bab">${bab || kitab}</span><span class="missing-meta">${lo}–${hi} &nbsp;·&nbsp; ${hi - lo + 1} hadith</span>`;
+          list.appendChild(row);
+        });
+      });
+      if (!missing.length) list.innerHTML = '<div class="toc-empty-note">Nothing missing — every in-scope chapter has at least one hadith built.</div>';
+    }
+
+    const sub = document.getElementById('missing-sub');
+    if (sub) sub.textContent = `In-scope for this term (not on the takhfeef drop list) but no hadith have been built into this guide yet — ${missing.length} chapters, ${totalHadith} hadith total.`;
+    const totalEl = document.getElementById('missing-total');
+    if (totalEl) totalEl.innerHTML = `Total: <strong>${missing.length} chapters</strong> — <strong>${totalHadith} hadith</strong> missing`;
+    const welcomeCount = document.getElementById('welcome-missing-count');
+    if (welcomeCount) welcomeCount.textContent = `${missing.length} chapters, ${totalHadith} hadith`;
+
+    missingCount = missing.length;
+    missingHadithTotal = totalHadith;
+    return { count: missing.length, totalHadith };
+  }
+  renderMissing();
+
   function buildToc() {
     const list = document.getElementById('toc-list');
     if (!list) return;
@@ -17820,13 +17912,14 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
 
     if (!list.children.length) list.innerHTML = '<div class="toc-empty-note">No hadith entries yet.</div>';
 
-    // Static entry point to the Missing Chapters view — always shown, last in the list.
+    // Entry point to the Missing Chapters view — always shown, last in the list.
+    // Count is live (renderMissing() runs before this), not hardcoded.
     const missingCard = document.createElement('div');
     missingCard.className = 'toc-bab-card toc-missing-card';
     missingCard.innerHTML = `
       <div class="toc-bab-header">
         <span class="toc-bab-name">⚠️ Missing Chapters</span>
-        <span class="toc-count">10</span>
+        <span class="toc-count">${missingCount}</span>
       </div>`;
     missingCard.querySelector('.toc-bab-header').addEventListener('click', () => setMissing(true));
     list.appendChild(missingCard);
