@@ -633,9 +633,15 @@
   body.toc-open .nav-bar,
   body.toc-open .progress-track,
   body.toc-open .mode-toggle,
-  body.toc-open > footer { display: none !important; }
+  body.toc-open > footer,
+  body.missing-open #main-content,
+  body.missing-open .nav-bar,
+  body.missing-open .progress-track,
+  body.missing-open .mode-toggle,
+  body.missing-open > footer { display: none !important; }
   body.alfaaz-open #alfaaz-view { display: block; }
   body.toc-open #toc-view { display: block; }
+  body.missing-open #missing-view { display: block; }
 
   .alfaaz-inner {
     max-width: 820px;
@@ -794,6 +800,32 @@
   }
   .toc-chip:hover { background: var(--gold); color: var(--gold-btn-text); border-color: var(--gold); }
   .toc-empty-note { text-align: center; color: var(--text-takhrij); font-size: 0.9rem; padding: 20px; }
+  .toc-missing-card { margin-top: 20px; border-top: 2px dashed var(--border); padding-top: 16px; }
+  .toc-missing-card .toc-bab-name { display: flex; align-items: center; gap: 8px; }
+
+  /* ==================== MISSING CHAPTERS VIEW ==================== */
+  #missing-view { display: none; }
+  .missing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    font-size: 0.98rem;
+  }
+  .missing-bab { flex: 1; }
+  .missing-meta { color: var(--text-takhrij); font-size: 0.85rem; white-space: nowrap; direction: ltr; }
+  .missing-total {
+    text-align: center;
+    margin-top: 18px;
+    padding: 12px;
+    color: var(--text-main);
+    border-top: 1px dashed var(--border);
+  }
 
   @media (max-width: 640px) {
     .mode-toggle span { display: none; }
@@ -7891,132 +7923,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   <!-- ==================== END 4857 ==================== -->
 
 
-    <!-- ==================== MISSING 4883–4891 ==================== -->
-  <div class="hadith-entry" data-num="4883">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ الْآدَابِ</span>
-      <span class="bab-text">بَابُ الْمِزَاح</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٤٨٨٣ – ٤٨٩١</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ الْمِزَاح
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 4883–4891, 9 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-    <!-- ==================== MISSING 4892–4909 ==================== -->
-  <div class="hadith-entry" data-num="4892">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ الْآدَابِ</span>
-      <span class="bab-text">بَابُ الْمُفَاخَرَةِ</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٤٨٩٢ – ٤٩٠٩</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ الْمُفَاخَرَةِ
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 4892–4909, 18 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-    <!-- ==================== MISSING 5002–5025 ==================== -->
-  <div class="hadith-entry" data-num="5002">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ الْآدَابِ</span>
-      <span class="bab-text">بَابُ الْحُبِّ فِي اللَّهِ وَمِنَ اللَّهِ</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٥٠٠٢ – ٥٠٢٥</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ الْحُبِّ فِي اللَّهِ وَمِنَ اللَّهِ
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 5002–5025, 24 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-    <!-- ==================== MISSING 5026–5051 ==================== -->
-  <div class="hadith-entry" data-num="5026">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ الْآدَابِ</span>
-      <span class="bab-text">بَابُ مَا يُنْهَى عَنْهُ مِنَ التَّهَاجُرِ وَالتَّقَاطُعِ وَاتِّبَاعِ الْعَوْرَاتِ</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٥٠٢٦ – ٥٠٥١</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ مَا يُنْهَى عَنْهُ مِنَ التَّهَاجُرِ وَالتَّقَاطُعِ وَاتِّبَاعِ الْعَوْرَاتِ
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 5026–5051, 26 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-    <!-- ==================== MISSING 5103–5121 ==================== -->
-  <div class="hadith-entry" data-num="5103">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ الْآدَابِ</span>
-      <span class="bab-text">بَابُ الْغَضَبِ وَالْكِبْرِ</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٥١٠٣ – ٥١٢١</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ الْغَضَبِ وَالْكِبْرِ
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 5103–5121, 19 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- ==================== HADITH 5378 ==================== -->
+              <!-- ==================== HADITH 5378 ==================== -->
   <div class="hadith-entry" data-num="5378">
 
     <div class="kitab-bab">
@@ -13731,107 +13638,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   <!-- ==================== END 5527 ==================== -->
 
 
-    <!-- ==================== MISSING 5531–5547 ==================== -->
-  <div class="hadith-entry" data-num="5531">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ</span>
-      <span class="bab-text">بَابُ الْحَشْرِ</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٥٥٣١ – ٥٥٤٧</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ الْحَشْرِ
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 5531–5547, 17 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-    <!-- ==================== MISSING 5548–5564 ==================== -->
-  <div class="hadith-entry" data-num="5548">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ</span>
-      <span class="bab-text">بَابُ الْحِسَابِ وَالْقِصَاصِ وَالْمِيزَانِ</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٥٥٤٨ – ٥٥٦٤</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ الْحِسَابِ وَالْقِصَاصِ وَالْمِيزَانِ
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 5548–5564, 17 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-    <!-- ==================== MISSING 5565–5610 ==================== -->
-  <div class="hadith-entry" data-num="5565">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ</span>
-      <span class="bab-text">بَابُ الْحَوْضِ وَالشَّفَاعَةِ</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٥٥٦٥ – ٥٦١٠</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ الْحَوْضِ وَالشَّفَاعَةِ
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 5565–5610, 46 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-    <!-- ==================== MISSING 5611–5653 ==================== -->
-  <div class="hadith-entry" data-num="5611">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ</span>
-      <span class="bab-text">بَابُ صِفَةِ الْجَنَّةِ وَأَهْلِهَا</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٥٦١١ – ٥٦٥٣</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ صِفَةِ الْجَنَّةِ وَأَهْلِهَا
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 5611–5653, 43 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- ==================== HADITH 5658 ==================== -->
+            <!-- ==================== HADITH 5658 ==================== -->
   <div class="hadith-entry" data-num="5658">
 
     <div class="kitab-bab">
@@ -13928,32 +13735,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   </div>
   <!-- ==================== END 5663 ==================== -->
 
-    <!-- ==================== MISSING 5664–5692 ==================== -->
-  <div class="hadith-entry" data-num="5664">
-
-    <div class="kitab-bab">
-      <span class="kitab-label">Kitab</span>
-      <span class="kitab-text">كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ</span>
-      <span class="bab-text">بَابُ صِفَةِ النَّارِ وَأَهْلِهَا</span>
-    </div>
-
-    <div class="matn-block">
-      <div class="hadith-badge">حديث ٥٦٦٤ – ٥٦٩٢</div>
-      <div class="matn-text">
-        لَمْ يُبْنَ أَيُّ حَدِيثٍ بَعْدُ مِنْ بَابُ صِفَةِ النَّارِ وَأَهْلِهَا
-      </div>
-    </div>
-
-    <div class="notes-block">
-      <div class="notes-header">Missing</div>
-      <ul class="notes-list">
-        <li>Missing hadith from this html — no entries from this bāb (class 5664–5692, 29 hadith) have been built yet.</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- ==================== HADITH 5693 ==================== -->
+      <!-- ==================== HADITH 5693 ==================== -->
   <div class="hadith-entry" data-num="5693">
 
     <div class="kitab-bab">
@@ -14729,6 +14511,32 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   </div>
 </section>
 <!-- ==================== END الْفِهْرِس ==================== -->
+
+<!-- ==================== MISSING CHAPTERS SECTION ==================== -->
+<section id="missing-view">
+  <div class="alfaaz-inner">
+    <button class="alfaaz-close" id="missing-close" title="Back to الْفِهْرِس">&#8594; Back</button>
+    <h2 class="alfaaz-title">Missing Chapters</h2>
+    <div class="alfaaz-sub">In-scope for this term (not on the takhfeef drop list) but no hadith have been built into this guide yet — 10 chapters, 248 hadith total.</div>
+
+    <div class="toc-kitab-header"><span>كِتَابُ الْآدَابِ</span><span class="toc-count">5 chapters</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ الْمِزَاح</span><span class="missing-meta">4883–4891 &nbsp;·&nbsp; 9 hadith</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ الْمُفَاخَرَةِ</span><span class="missing-meta">4892–4909 &nbsp;·&nbsp; 18 hadith</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ الْحُبِّ فِي اللَّهِ وَمِنَ اللَّهِ</span><span class="missing-meta">5002–5025 &nbsp;·&nbsp; 24 hadith</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ مَا يُنْهَى عَنْهُ مِنَ التَّهَاجُرِ وَالتَّقَاطُعِ وَاتِّبَاعِ الْعَوْرَاتِ</span><span class="missing-meta">5026–5051 &nbsp;·&nbsp; 26 hadith</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ الْغَضَبِ وَالْكِبْرِ</span><span class="missing-meta">5103–5121 &nbsp;·&nbsp; 19 hadith</span></div>
+
+    <div class="toc-kitab-header" style="margin-top:20px"><span>كِتَابُ أَحْوَالِ الْقِيَامَةِ وَبَدْءِ الْخَلْقِ</span><span class="toc-count">5 chapters</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ الْحَشْرِ</span><span class="missing-meta">5531–5547 &nbsp;·&nbsp; 17 hadith</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ الْحِسَابِ وَالْقِصَاصِ وَالْمِيزَانِ</span><span class="missing-meta">5548–5564 &nbsp;·&nbsp; 17 hadith</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ الْحَوْضِ وَالشَّفَاعَةِ</span><span class="missing-meta">5565–5610 &nbsp;·&nbsp; 46 hadith</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ صِفَةِ الْجَنَّةِ وَأَهْلِهَا</span><span class="missing-meta">5611–5653 &nbsp;·&nbsp; 43 hadith</span></div>
+    <div class="missing-row"><span class="missing-bab">بَابُ صِفَةِ النَّارِ وَأَهْلِهَا</span><span class="missing-meta">5664–5692 &nbsp;·&nbsp; 29 hadith</span></div>
+
+    <div class="missing-total">Total: <strong>10 chapters</strong> — <strong>248 hadith</strong> missing</div>
+  </div>
+</section>
+<!-- ==================== END MISSING CHAPTERS ==================== -->
 
 <!-- ==================== الأَلْفَاظ — GLOSSARY SECTION ==================== -->
 <section id="alfaaz-view">
@@ -17902,7 +17710,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const alfaazBtn = document.getElementById('alfaaz-btn');
   const alfaazClose = document.getElementById('alfaaz-close');
   function setAlfaaz(on) {
-    if (on) { document.body.classList.remove('toc-open'); document.body.classList.remove('welcome-open'); }
+    if (on) { document.body.classList.remove('toc-open'); document.body.classList.remove('welcome-open'); document.body.classList.remove('missing-open'); }
     document.body.classList.toggle('alfaaz-open', on);
     window.scrollTo(0, 0);
   }
@@ -17916,7 +17724,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const tocBtn = document.getElementById('toc-btn');
   const tocClose = document.getElementById('toc-close');
   function setToc(on) {
-    if (on) { setAlfaaz(false); document.body.classList.remove('welcome-open'); }
+    if (on) { setAlfaaz(false); document.body.classList.remove('welcome-open'); document.body.classList.remove('missing-open'); }
     document.body.classList.toggle('toc-open', on);
     window.scrollTo(0, 0);
   }
@@ -17928,12 +17736,24 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   const welcomeBtn = document.getElementById('welcome-btn');
   const welcomeStart = document.getElementById('welcome-start');
   function setWelcome(on) {
-    if (on) { setAlfaaz(false); setToc(false); }
+    if (on) { setAlfaaz(false); setToc(false); document.body.classList.remove('missing-open'); }
     document.body.classList.toggle('welcome-open', on);
     window.scrollTo(0, 0);
   }
   welcomeBtn.addEventListener('click', () => setWelcome(!document.body.classList.contains('welcome-open')));
   welcomeStart.addEventListener('click', () => setWelcome(false));
+
+  // MISSING CHAPTERS — reached only via a card at the end of الْفِهْرِس (no
+  // header button of its own). Content is a static, hand-maintained list (there's
+  // no DOM to derive it from, since these chapters have zero hadith-entries) —
+  // update it by hand in the #missing-view markup when a listed chapter gets built.
+  const missingClose = document.getElementById('missing-close');
+  function setMissing(on) {
+    if (on) { setAlfaaz(false); setWelcome(false); document.body.classList.remove('toc-open'); }
+    document.body.classList.toggle('missing-open', on);
+    window.scrollTo(0, 0);
+  }
+  missingClose.addEventListener('click', () => setToc(true));
 
   function tocGoto(num) {
     setToc(false);
@@ -17999,6 +17819,17 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     });
 
     if (!list.children.length) list.innerHTML = '<div class="toc-empty-note">No hadith entries yet.</div>';
+
+    // Static entry point to the Missing Chapters view — always shown, last in the list.
+    const missingCard = document.createElement('div');
+    missingCard.className = 'toc-bab-card toc-missing-card';
+    missingCard.innerHTML = `
+      <div class="toc-bab-header">
+        <span class="toc-bab-name">⚠️ Missing Chapters</span>
+        <span class="toc-count">10</span>
+      </div>`;
+    missingCard.querySelector('.toc-bab-header').addEventListener('click', () => setMissing(true));
+    list.appendChild(missingCard);
   }
   buildToc();
 
