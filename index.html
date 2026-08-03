@@ -554,8 +554,13 @@
   }
   .mode-toggle.stack-1 { bottom: 70px; }
   .mode-toggle.stack-2 { bottom: 118px; }
+  .mode-toggle.stack-3 { bottom: 166px; }
+  .mode-toggle.stack-4 { bottom: 214px; }
   body.hide-translations .trans-block { display: none !important; }
   body.hide-meanings .meanings-block { display: none !important; }
+  body.hide-commentary .commentary-block,
+  body.hide-commentary .xref-block { display: none !important; }
+  body.collapse-chapters .kitab-bab.kb-repeat { display: none !important; }
 
   .switch { position: relative; width: 38px; height: 21px; flex-shrink: 0; }
   .switch input { opacity: 0; width: 0; height: 0; }
@@ -807,6 +812,47 @@
   .toc-empty-note { text-align: center; color: var(--text-takhrij); font-size: 0.9rem; padding: 20px; }
   .toc-missing-card { margin-top: 20px; border-top: 2px dashed var(--border); padding-top: 16px; }
   .toc-missing-card .toc-bab-name { display: flex; align-items: center; gap: 8px; }
+
+  .toc-secret-box {
+    margin-top: 14px;
+    height: 16px;
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.2s ease;
+  }
+  .toc-secret-box:hover { opacity: 0.65; }
+  .toc-secret-panel {
+    margin-top: 10px;
+    display: none;
+    align-items: center;
+    gap: 8px;
+  }
+  .toc-secret-panel.open { display: flex; }
+  .toc-secret-panel input {
+    flex: 1;
+    background: var(--meanings-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    direction: ltr;
+  }
+  .toc-secret-panel button {
+    background: var(--gold);
+    color: var(--gold-btn-text);
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .toc-secret-panel.shake input { border-color: #c0392b; }
+  .toc-secret-note { font-size: 0.8rem; color: var(--text-takhrij); margin-top: 6px; text-align: center; }
 
   /* ==================== MISSING CHAPTERS VIEW ==================== */
   #missing-view { display: none; }
@@ -1090,6 +1136,22 @@
   <span>Word Meanings</span>
   <label class="switch">
     <input type="checkbox" id="meanings-toggle" checked>
+    <span class="slider"></span>
+  </label>
+</div>
+
+<div class="mode-toggle stack-3" id="commentary-toggle-wrap" style="display:none;" title="Show or hide the Commentary Notes and Cross-ref blocks on every hadith">
+  <span>Commentary/Xref</span>
+  <label class="switch">
+    <input type="checkbox" id="commentary-toggle" checked>
+    <span class="slider"></span>
+  </label>
+</div>
+
+<div class="mode-toggle stack-4" id="chapters-toggle-wrap" style="display:none;" title="Show every hadith's chapter label, or only show it when the chapter actually changes">
+  <span>Chapter Labels</span>
+  <label class="switch">
+    <input type="checkbox" id="chapters-toggle" checked>
     <span class="slider"></span>
   </label>
 </div>
@@ -15326,6 +15388,11 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     <h2 class="alfaaz-title">الْفِهْرِس</h2>
     <div class="alfaaz-sub">Every hadith currently in this guide, by كِتَاب &amp; بَاب. Tap a bāb to open it, tap a number to jump straight there.</div>
     <div id="toc-list"></div>
+    <div class="toc-secret-box" id="toc-secret-box"></div>
+    <div class="toc-secret-panel" id="toc-secret-panel">
+      <input type="text" id="toc-secret-input" placeholder="····" maxlength="8" inputmode="numeric">
+      <button type="button" id="toc-secret-submit">Unlock</button>
+    </div>
   </div>
 </section>
 <!-- ==================== END الْفِهْرِس ==================== -->
@@ -18462,6 +18529,83 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     localStorage.setItem('mishkatShowMeanings', meaningsToggle.checked ? '1' : '0');
   });
   applyMeaningsVisible(localStorage.getItem('mishkatShowMeanings') !== '0');
+
+  // Commentary Notes / Cross-ref toggle — unlocked-only, same show/hide pattern as translation/meanings
+  const commentaryToggle = document.getElementById('commentary-toggle');
+  function applyCommentaryVisible(on) {
+    document.body.classList.toggle('hide-commentary', !on);
+    commentaryToggle.checked = on;
+  }
+  commentaryToggle.addEventListener('change', () => {
+    applyCommentaryVisible(commentaryToggle.checked);
+    localStorage.setItem('mishkatShowCommentary', commentaryToggle.checked ? '1' : '0');
+  });
+  applyCommentaryVisible(localStorage.getItem('mishkatShowCommentary') !== '0');
+
+  // Chapter Labels toggle — unlocked-only. ON (default) = every hadith shows its
+  // kitāb/bāb header as normal. OFF = only the FIRST hadith of a new kitāb+bāb
+  // combination shows the header; consecutive hadith in the same chapter have
+  // theirs hidden (nothing is deleted from the DOM, just a CSS class toggle —
+  // computed fresh each time the toggle is switched on, so it always reflects
+  // the current live entry order).
+  const chaptersToggle = document.getElementById('chapters-toggle');
+  function computeChapterRepeats() {
+    let prevKey = null;
+    entries.forEach(e => {
+      const kitab = e.querySelector('.kitab-text')?.textContent.trim() || '';
+      const bab = e.querySelector('.bab-text')?.textContent.trim() || '';
+      const key = kitab + '|' + bab;
+      const kbDiv = e.querySelector('.kitab-bab');
+      if (!kbDiv) return;
+      kbDiv.classList.toggle('kb-repeat', key === prevKey);
+      prevKey = key;
+    });
+  }
+  function applyChaptersVisible(on) {
+    if (!on) computeChapterRepeats();
+    document.body.classList.toggle('collapse-chapters', !on);
+    chaptersToggle.checked = on;
+  }
+  chaptersToggle.addEventListener('change', () => {
+    applyChaptersVisible(chaptersToggle.checked);
+    localStorage.setItem('mishkatShowChapterLabels', chaptersToggle.checked ? '1' : '0');
+  });
+  applyChaptersVisible(localStorage.getItem('mishkatShowChapterLabels') !== '0');
+
+  // الْفِهْرِس secret unlock box — a plain dashed box at the end of the TOC list.
+  // Clicking it reveals an inline passcode field (no native prompt(), so it stays
+  // in-theme and stays testable via automation); the correct code reveals the two
+  // toggles above and the unlock persists via localStorage. This is a fun/soft
+  // gate, not real security — the code is visible in this very source file.
+  const SECRET_CODE = '1211';
+  const secretBox = document.getElementById('toc-secret-box');
+  const secretPanel = document.getElementById('toc-secret-panel');
+  const secretInput = document.getElementById('toc-secret-input');
+  const secretSubmit = document.getElementById('toc-secret-submit');
+  function isDevUnlocked() { return localStorage.getItem('mishkatDevUnlocked') === '1'; }
+  function updateSecretToggleVisibility() {
+    const on = isDevUnlocked();
+    document.getElementById('commentary-toggle-wrap').style.display = on ? 'flex' : 'none';
+    document.getElementById('chapters-toggle-wrap').style.display = on ? 'flex' : 'none';
+  }
+  function trySecretCode() {
+    if (secretInput.value.trim() === SECRET_CODE) {
+      localStorage.setItem('mishkatDevUnlocked', '1');
+      updateSecretToggleVisibility();
+      secretPanel.classList.remove('open');
+      secretInput.value = '';
+    } else {
+      secretPanel.classList.add('shake');
+      setTimeout(() => secretPanel.classList.remove('shake'), 400);
+    }
+  }
+  secretBox.addEventListener('click', () => {
+    secretPanel.classList.toggle('open');
+    if (secretPanel.classList.contains('open')) secretInput.focus();
+  });
+  secretSubmit.addEventListener('click', trySecretCode);
+  secretInput.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') trySecretCode(); });
+  updateSecretToggleVisibility();
 
   // Slide View toggle — persists via localStorage
   const slideToggle = document.getElementById('slide-toggle');
