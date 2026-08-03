@@ -556,18 +556,22 @@
   }
   .mode-toggle.stack-1 { bottom: 70px; }
   .mode-toggle.stack-2 { bottom: 118px; }
-  .mode-toggle.stack-3 {
-    bottom: 148px;
+  .mode-toggle.stack-3 { bottom: 166px; }
+  .mode-toggle.stack-4 { bottom: 214px; }
+
+  /* Once the الْفِهْرِس secret passcode is entered, ALL FIVE floating toggle
+     pills (not just the two newly-unlocked ones) switch to a smaller, more
+     transparent, more tightly-stacked look. */
+  body.dev-unlocked .mode-toggle {
     background: var(--toggle-bg-soft);
     transform: scale(0.5);
     transform-origin: bottom right;
   }
-  .mode-toggle.stack-4 {
-    bottom: 176px;
-    background: var(--toggle-bg-soft);
-    transform: scale(0.5);
-    transform-origin: bottom right;
-  }
+  body.dev-unlocked .mode-toggle:not(.stack-1):not(.stack-2):not(.stack-3):not(.stack-4) { bottom: 22px; }
+  body.dev-unlocked .mode-toggle.stack-1 { bottom: 40px; }
+  body.dev-unlocked .mode-toggle.stack-2 { bottom: 58px; }
+  body.dev-unlocked .mode-toggle.stack-3 { bottom: 76px; }
+  body.dev-unlocked .mode-toggle.stack-4 { bottom: 94px; }
   body.hide-translations .trans-block { display: none !important; }
   body.hide-meanings .meanings-block { display: none !important; }
   body.hide-commentary .commentary-block,
@@ -18599,6 +18603,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     const on = isDevUnlocked();
     document.getElementById('commentary-toggle-wrap').style.display = on ? 'flex' : 'none';
     document.getElementById('chapters-toggle-wrap').style.display = on ? 'flex' : 'none';
+    document.body.classList.toggle('dev-unlocked', on);
   }
   function trySecretCode() {
     if (secretInput.value.trim() === SECRET_CODE) {
