@@ -18679,7 +18679,22 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   }
   function trySecretCode() {
     if (secretInput.value.trim() === SECRET_CODE) {
-      localStorage.setItem('mishkatDevUnlocked', '1');
+      if (isDevUnlocked()) {
+        // Entering the correct code again while already unlocked re-locks
+        // and reverts all three secret toggles back to their defaults
+        // (Commentary/Xref on, Chapter Labels on, Landscape Only off), not
+        // just hides the pills — so the site fully returns to how it looks
+        // before the code was ever entered.
+        localStorage.setItem('mishkatDevUnlocked', '0');
+        applyCommentaryVisible(true);
+        localStorage.setItem('mishkatShowCommentary', '1');
+        applyChaptersVisible(true);
+        localStorage.setItem('mishkatShowChapterLabels', '1');
+        applyLandscapeOnly(false);
+        localStorage.setItem('mishkatForceLandscape', '0');
+      } else {
+        localStorage.setItem('mishkatDevUnlocked', '1');
+      }
       updateSecretToggleVisibility();
       secretPanel.classList.remove('open');
       secretInput.value = '';
