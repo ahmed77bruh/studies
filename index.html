@@ -552,6 +552,11 @@
     letter-spacing: 0.4px;
     white-space: nowrap;
   }
+  .mode-toggle.stack-1 { bottom: 70px; }
+  .mode-toggle.stack-2 { bottom: 118px; }
+  body.hide-translations .trans-block { display: none !important; }
+  body.hide-meanings .meanings-block { display: none !important; }
+
   .switch { position: relative; width: 38px; height: 21px; flex-shrink: 0; }
   .switch input { opacity: 0; width: 0; height: 0; }
   .switch .slider {
@@ -1073,6 +1078,22 @@
 </head>
 <body class="welcome-open">
 
+<div class="mode-toggle stack-2" title="Show or hide the Translation block on every hadith">
+  <span>Translation</span>
+  <label class="switch">
+    <input type="checkbox" id="trans-toggle" checked>
+    <span class="slider"></span>
+  </label>
+</div>
+
+<div class="mode-toggle stack-1" title="Show or hide the Word Meanings — Mirqat block on every hadith">
+  <span>Word Meanings</span>
+  <label class="switch">
+    <input type="checkbox" id="meanings-toggle" checked>
+    <span class="slider"></span>
+  </label>
+</div>
+
 <div class="mode-toggle" title="Toggle slide view (each hadith broken into scrollable sections you page through one by one)">
   <span>Slide View</span>
   <label class="switch">
@@ -1193,7 +1214,7 @@
 
     <div class="trans-block">
       <div class="trans-header">Translation</div>
-      <div class="trans-text">When Abu Quhafa (Abu Bakr's (R.A.) father) was brought on the day of the Conquest of Makkah with his head and beard white like hyssop, the Prophet (S.A.W.) said, "Change this with something, but avoid black."</div>
+      <div class="trans-text">"Jews and Christians do not dye [their beards], so act differently from them."</div>
     </div>
     </div>
 
@@ -1252,7 +1273,7 @@
 
     <div class="trans-block">
       <div class="trans-header">Translation</div>
-      <div class="trans-text">The Prophet (S.A.W.) liked to do the same as the People of the Book in matters about which he had received no command. The People of the Book used to let their hair hang down and the polytheists used to part their hair, so the Prophet (S.A.W.) let his forelock hang down, but afterwards he parted it.</div>
+      <div class="trans-text">When Abu Quhafa (Abu Bakr's (R.A.) father) was brought on the day of the Conquest of Makkah with his head and beard white like hyssop, the Prophet (S.A.W.) said, "Change this with something, but avoid black."</div>
     </div>
     </div>
 
@@ -2833,7 +2854,7 @@
 
     <div class="trans-block">
       <div class="trans-header">Translation</div>
-      <div class="trans-text">"'Isa ibn Hamza said: I visited Abdullah ibn Ukaim who was suffering from a skin redness (humra). I said: 'Will you not hang an amulet?' He said: 'I seek refuge in Allah from that! The Messenger of Allah (S.A.W.) said: Whoever attaches himself to something will be left to it.'"</div>
+      <div class="trans-text">"I visited Abdullah ibn Ukaim (R.A.), who was suffering from a skin redness (ḥumrah). I said, 'Will you not hang an amulet?' He said, 'I seek refuge in Allah from that! The Messenger of Allah (S.A.W.) said: Whoever attaches himself to something will be left to it.'"</div>
     </div>
 
     <div class="notes-block">
@@ -5161,7 +5182,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
 
     <div class="trans-block">
       <div class="trans-header">Translation</div>
-      <div class="trans-text">Qatādah said: I asked Anas (R.A.), "Was the handshake (مُصَافَحَة) practiced among the companions of the Messenger of Allah (S.A.W.)?" He said, "Yes."</div>
+      <div class="trans-text">I asked Anas (R.A.), "Was the handshake (مُصَافَحَة) practiced among the companions of the Messenger of Allah (S.A.W.)?" He said, "Yes."</div>
     </div>
 
     <div class="notes-block">
@@ -7928,7 +7949,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
 
     <div class="trans-block">
       <div class="trans-header">Translation</div>
-      <div class="trans-text">ʿĀʾishah (R.A.) said: "I said to the Prophet (S.A.W.): 'That is enough for you regarding Ṣafiyyah, such-and-such'" — meaning she was short — "so he said: 'You have certainly said a word which, if mixed into the sea, would have changed/corrupted it entirely.'"</div>
+      <div class="trans-text">"I said to the Prophet (S.A.W.): 'That is enough for you regarding Ṣafiyyah, such-and-such'" — meaning she was short — "so he said: 'You have certainly said a word which, if mixed into the sea, would have changed/corrupted it entirely.'"</div>
     </div>
 
     <div class="notes-block">
@@ -13827,7 +13848,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
 
     <div class="trans-block">
       <div class="trans-header">Translation</div>
-      <div class="trans-text">Masruq said: "I was with Aishah (R.A.), and I said, 'O Mother of the Believers, did Muhammad (S.A.W.) see his Lord?' She said, 'What you have said has made my hair stand on end! Whoever tells you that Muhammad (S.A.W.) saw his Lord has lied.' Then she recited: 'Vision cannot perceive Him, but He perceives [all] vision' (Qur'an 6:103) and 'It is not for any human being that Allah should speak to him except by revelation or from behind a partition' (Qur'an 42:51)."</div>
+      <div class="trans-text">"I was with Aishah (R.A.), and I said, 'O Mother of the Believers, did Muhammad (S.A.W.) see his Lord?' She said, 'What you have said has made my hair stand on end! Whoever tells you that Muhammad (S.A.W.) saw his Lord has lied.' Then she recited: 'Vision cannot perceive Him, but He perceives [all] vision' (Qur'an 6:103) and 'It is not for any human being that Allah should speak to him except by revelation or from behind a partition' (Qur'an 42:51)."</div>
     </div>
     </div>
 
@@ -17812,6 +17833,30 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     else window.scrollTo(0, 0);
   }
   window.gotoHadith = gotoHadith;
+
+  // Translation / Word Meanings visibility toggles — default ON (visible),
+  // persist via localStorage, independent of each other and of Slide View.
+  const transToggle = document.getElementById('trans-toggle');
+  function applyTransVisible(on) {
+    document.body.classList.toggle('hide-translations', !on);
+    transToggle.checked = on;
+  }
+  transToggle.addEventListener('change', () => {
+    applyTransVisible(transToggle.checked);
+    localStorage.setItem('mishkatShowTranslations', transToggle.checked ? '1' : '0');
+  });
+  applyTransVisible(localStorage.getItem('mishkatShowTranslations') !== '0');
+
+  const meaningsToggle = document.getElementById('meanings-toggle');
+  function applyMeaningsVisible(on) {
+    document.body.classList.toggle('hide-meanings', !on);
+    meaningsToggle.checked = on;
+  }
+  meaningsToggle.addEventListener('change', () => {
+    applyMeaningsVisible(meaningsToggle.checked);
+    localStorage.setItem('mishkatShowMeanings', meaningsToggle.checked ? '1' : '0');
+  });
+  applyMeaningsVisible(localStorage.getItem('mishkatShowMeanings') !== '0');
 
   // Slide View toggle — persists via localStorage
   const slideToggle = document.getElementById('slide-toggle');
