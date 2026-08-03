@@ -558,25 +558,67 @@
   .mode-toggle.stack-2 { bottom: 118px; }
   .mode-toggle.stack-3 { bottom: 166px; }
   .mode-toggle.stack-4 { bottom: 214px; }
+  .mode-toggle.stack-5 { bottom: 262px; }
 
-  /* Once the الْفِهْرِس secret passcode is entered, ALL FIVE floating toggle
-     pills (not just the two newly-unlocked ones) switch to a smaller, more
+  /* Once the الْفِهْرِس secret passcode is entered, ALL SIX floating toggle
+     pills (not just the three newly-unlocked ones) switch to a smaller, more
      transparent, more tightly-stacked look. */
   body.dev-unlocked .mode-toggle {
     background: var(--toggle-bg-soft);
     transform: scale(0.5);
     transform-origin: bottom right;
   }
-  body.dev-unlocked .mode-toggle:not(.stack-1):not(.stack-2):not(.stack-3):not(.stack-4) { bottom: 22px; }
+  body.dev-unlocked .mode-toggle:not(.stack-1):not(.stack-2):not(.stack-3):not(.stack-4):not(.stack-5) { bottom: 22px; }
   body.dev-unlocked .mode-toggle.stack-1 { bottom: 40px; }
   body.dev-unlocked .mode-toggle.stack-2 { bottom: 58px; }
   body.dev-unlocked .mode-toggle.stack-3 { bottom: 76px; }
   body.dev-unlocked .mode-toggle.stack-4 { bottom: 94px; }
+  body.dev-unlocked .mode-toggle.stack-5 { bottom: 112px; }
   body.hide-translations .trans-block { display: none !important; }
   body.hide-meanings .meanings-block { display: none !important; }
   body.hide-commentary .commentary-block,
   body.hide-commentary .xref-block { display: none !important; }
   body.collapse-chapters .kitab-bab.kb-repeat { display: none !important; }
+
+  /* Rotate-to-landscape prompt — unlocked-only (see الْفِهْرِس secret box).
+     When the "Landscape Only" toggle is on and the viewport is portrait-shaped
+     and narrow (phone/tablet, not a tall desktop window), covers the whole
+     screen and asks the visitor to rotate their device. There is no way for a
+     website to force a phone to actually rotate, so this is a prompt-and-wait,
+     not an enforced lock. */
+  #rotate-prompt {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--card-bg);
+    color: var(--text-main);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+  }
+  #rotate-prompt .rp-icon {
+    font-size: 3.2rem;
+    display: inline-block;
+    animation: rp-spin 1.6s ease-in-out infinite;
+  }
+  #rotate-prompt .rp-text {
+    margin-top: 18px;
+    font-size: 1.05rem;
+    max-width: 320px;
+    line-height: 1.5;
+    direction: ltr;
+  }
+  @keyframes rp-spin {
+    0%, 20% { transform: rotate(0deg); }
+    50%, 70% { transform: rotate(90deg); }
+    100% { transform: rotate(90deg); }
+  }
+  @media (orientation: portrait) and (max-width: 900px) {
+    body.force-landscape #rotate-prompt { display: flex; }
+  }
 
   .switch { position: relative; width: 38px; height: 21px; flex-shrink: 0; }
   .switch input { opacity: 0; width: 0; height: 0; }
@@ -1140,6 +1182,11 @@
 </head>
 <body class="welcome-open">
 
+<div id="rotate-prompt">
+  <span class="rp-icon">📱</span>
+  <div class="rp-text">Please rotate your device to landscape for the best experience.</div>
+</div>
+
 <div class="mode-toggle stack-2" title="Show or hide the Translation block on every hadith">
   <span>Translation</span>
   <label class="switch">
@@ -1168,6 +1215,14 @@
   <span>Chapter Labels</span>
   <label class="switch">
     <input type="checkbox" id="chapters-toggle" checked>
+    <span class="slider"></span>
+  </label>
+</div>
+
+<div class="mode-toggle stack-5" id="landscape-toggle-wrap" style="display:none;" title="Prompt visitors on narrow portrait screens to rotate to landscape">
+  <span>Landscape Only</span>
+  <label class="switch">
+    <input type="checkbox" id="landscape-toggle">
     <span class="slider"></span>
   </label>
 </div>
@@ -18588,11 +18643,27 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
   });
   applyChaptersVisible(localStorage.getItem('mishkatShowChapterLabels') !== '0');
 
+  // Landscape Only toggle — unlocked-only. OFF (default) = normal behavior,
+  // any orientation. ON = a rotate-to-landscape prompt covers the screen
+  // whenever the viewport is portrait-shaped and narrow (see the #rotate-prompt
+  // CSS/media query). There's no way to force an actual device rotation from a
+  // webpage, so this only ever prompts-and-waits, never enforces.
+  const landscapeToggle = document.getElementById('landscape-toggle');
+  function applyLandscapeOnly(on) {
+    document.body.classList.toggle('force-landscape', on);
+    landscapeToggle.checked = on;
+  }
+  landscapeToggle.addEventListener('change', () => {
+    applyLandscapeOnly(landscapeToggle.checked);
+    localStorage.setItem('mishkatForceLandscape', landscapeToggle.checked ? '1' : '0');
+  });
+  applyLandscapeOnly(localStorage.getItem('mishkatForceLandscape') === '1');
+
   // الْفِهْرِس secret unlock box — a plain dashed box at the end of the TOC list.
   // Clicking it reveals an inline passcode field (no native prompt(), so it stays
-  // in-theme and stays testable via automation); the correct code reveals the two
-  // toggles above and the unlock persists via localStorage. This is a fun/soft
-  // gate, not real security — the code is visible in this very source file.
+  // in-theme and stays testable via automation); the correct code reveals the
+  // three toggles above and the unlock persists via localStorage. This is a
+  // fun/soft gate, not real security — the code is visible in this very source file.
   const SECRET_CODE = '1211';
   const secretBox = document.getElementById('toc-secret-box');
   const secretPanel = document.getElementById('toc-secret-panel');
@@ -18603,6 +18674,7 @@ I said to them: 'You have shown me much tonight; now tell me what I saw.' They s
     const on = isDevUnlocked();
     document.getElementById('commentary-toggle-wrap').style.display = on ? 'flex' : 'none';
     document.getElementById('chapters-toggle-wrap').style.display = on ? 'flex' : 'none';
+    document.getElementById('landscape-toggle-wrap').style.display = on ? 'flex' : 'none';
     document.body.classList.toggle('dev-unlocked', on);
   }
   function trySecretCode() {
