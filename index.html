@@ -17,6 +17,7 @@
     --source-tag-bg: #f0ece0;
     --xref-bg: #f4f0e8;
     --toggle-bg: rgba(255,255,255,0.95);
+    --toggle-bg-soft: rgba(255,255,255,0.45);
     --switch-track: #ccc;
     --slide-surround-bg: #4a4a44;
     --slide-card-border: transparent;
@@ -69,6 +70,7 @@
     --source-tag-bg: #23221a;
     --xref-bg: #1c1b15;
     --toggle-bg: rgba(30,28,22,0.95);
+    --toggle-bg-soft: rgba(30,28,22,0.45);
     --switch-track: #444;
     --slide-surround-bg: #0c0b08;
     --slide-card-border: var(--border);
@@ -554,8 +556,18 @@
   }
   .mode-toggle.stack-1 { bottom: 70px; }
   .mode-toggle.stack-2 { bottom: 118px; }
-  .mode-toggle.stack-3 { bottom: 166px; }
-  .mode-toggle.stack-4 { bottom: 214px; }
+  .mode-toggle.stack-3 {
+    bottom: 148px;
+    background: var(--toggle-bg-soft);
+    transform: scale(0.5);
+    transform-origin: bottom right;
+  }
+  .mode-toggle.stack-4 {
+    bottom: 176px;
+    background: var(--toggle-bg-soft);
+    transform: scale(0.5);
+    transform-origin: bottom right;
+  }
   body.hide-translations .trans-block { display: none !important; }
   body.hide-meanings .meanings-block { display: none !important; }
   body.hide-commentary .commentary-block,
